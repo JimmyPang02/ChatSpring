@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".appsetting.ApiIkeyFragment">
+
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="35dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/key4"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/APIKEY"
+        android:layout_width="100dp"
+        android:layout_height="39dp"
+        android:text="API KEY"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
+        app:layout_constraintHorizontal_bias="0.282"
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/APIURL"
+        app:layout_constraintVertical_bias="0.963" />
+
+    <EditText
+        android:id="@+id/apiurl_edit_text"
+        android:layout_width="298dp"
+        android:layout_height="69dp"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.231" />
+
+    <TextView
+        android:id="@+id/APIURL"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+        android:text="API URL"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/apiurl_edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
+        app:layout_constraintHorizontal_bias="0.282"
+        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/apikey_edit_text"
+        android:layout_width="298dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="80dp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/apiurl_edit_text" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="109dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_rounded_blue"
+        android:text="保存"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/apikey_edit_text" />
+
+    <ImageView
+        android:id="@+id/image_view1"
+        android:layout_width="49dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/key2"
+        app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/APIKEY"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text" />
+
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/url"
+        app:layout_constraintBottom_toBottomOf="@+id/APIURL"
+        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="API"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

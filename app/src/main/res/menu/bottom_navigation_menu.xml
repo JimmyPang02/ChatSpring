@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_app_center"
+        android:title="App Center"
+        android:icon="@drawable/chatspring" />
+    <item
+        android:id="@+id/menu_app_workshop"
+        android:title="App Workshop"
+        android:icon="@drawable/workshop" />
+    <item
+        android:id="@+id/settings"
+        android:title="设置"
+        android:icon="@drawable/setting"
+        />
+</menu>

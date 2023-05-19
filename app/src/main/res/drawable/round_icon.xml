@@ -1,0 +1,18 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/circle">
+        <shape android:shape="oval">
+            <solid android:color="@color/aliceblue" />
+            <stroke
+                android:width="2dp"
+                android:color="#999999" />
+        </shape>
+    </item>
+    <item android:id="@+id/icon">
+        <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+            android:drawable="@drawable/baseline_refresh_24">
+            <target
+                android:name="rotation"
+                android:animation="@animator/rotate_animator" />
+        </animated-vector>
+    </item>
+</layer-list>

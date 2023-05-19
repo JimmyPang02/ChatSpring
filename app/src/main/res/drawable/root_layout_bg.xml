@@ -1,0 +1,15 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- 设置圆角和边框 -->
+    <corners android:radius="8dp" />
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFCC" />
+
+    <!-- 添加渐变背景 -->
+    <gradient
+        android:startColor="#FFFFCC"
+        android:endColor="#F6DCDC"
+        android:angle="45" />
+</shape>

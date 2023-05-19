@@ -1,0 +1,30 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/appCenterFragment">
+
+    <fragment
+        android:id="@+id/appCenterFragment"
+        android:name="com.chatspring.appCenter"
+        android:label="App Center"
+        tools:layout="@layout/fragment_app_center" />
+
+    <fragment
+        android:id="@+id/appWorkshopFragment"
+        android:name="com.chatspring.appworkshop.AppWorkshop"
+        android:label="App Workshop"
+        tools:layout="@layout/review_app_workshop" />
+
+    <fragment
+        android:id="@+id/AppSetting_notlogin"
+        android:name="com.chatspring.appsetting.MainFragment"
+        android:label="App Setting"
+        tools:layout="@layout/activity_main_fragment" />
+
+    <fragment
+        android:id="@+id/AppSetting_islogin"
+        android:name="com.chatspring.appsetting.MainAfterFragment"
+        android:label="App Setting After Login"
+        tools:layout="@layout/fragment_mainafter" />
+
+</navigation>

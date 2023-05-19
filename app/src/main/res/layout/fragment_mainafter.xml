@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".appsetting.MainAfterFragment">
+
+    <Button
+        android:id="@+id/id_button"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_border"
+        android:text="goat"
+
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/API_key_button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+
+        android:background="@drawable/round_border"
+        android:text="API KEY"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/id_button"
+        app:layout_constraintStart_toStartOf="@+id/id_button"
+        app:layout_constraintTop_toBottomOf="@+id/id_button" />
+
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+
+        android:background="@drawable/round_border"
+        android:text="设置"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/API_key_button"
+        app:layout_constraintStart_toStartOf="@+id/API_key_button"
+        app:layout_constraintTop_toBottomOf="@+id/API_key_button" />
+
+    <ImageView
+        android:id="@+id/image_view1"
+        android:layout_width="42dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/aman"
+        app:layout_constraintBottom_toBottomOf="@+id/id_button"
+        app:layout_constraintStart_toStartOf="@+id/id_button"
+        app:layout_constraintTop_toTopOf="@+id/id_button"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="43dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/key"
+        app:layout_constraintBottom_toBottomOf="@+id/API_key_button"
+        app:layout_constraintStart_toStartOf="@+id/API_key_button"
+        app:layout_constraintTop_toTopOf="@+id/API_key_button"
+        app:layout_constraintVertical_bias="0.583" />
+
+    <ImageView
+        android:id="@+id/image_view3"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/setting2"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_button"
+        app:layout_constraintStart_toStartOf="@+id/setting_button"
+        app:layout_constraintTop_toTopOf="@+id/setting_button"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <ImageView
+        android:id="@+id/image_view4"
+        android:layout_width="28dp"
+        android:layout_height="29dp"
+        android:src="@drawable/right1"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_button"
+        app:layout_constraintEnd_toEndOf="@+id/setting_button"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="@+id/setting_button"
+        app:layout_constraintTop_toTopOf="@+id/setting_button"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <ImageView
+        android:id="@+id/image_view5"
+        android:layout_width="28dp"
+        android:layout_height="29dp"
+        android:src="@drawable/right1"
+        app:layout_constraintBottom_toBottomOf="@+id/API_key_button"
+        app:layout_constraintEnd_toEndOf="@+id/API_key_button"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="@+id/API_key_button"
+        app:layout_constraintTop_toTopOf="@+id/API_key_button"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <ImageView
+        android:id="@+id/image_view6"
+        android:layout_width="28dp"
+        android:layout_height="29dp"
+        android:src="@drawable/right1"
+        app:layout_constraintBottom_toBottomOf="@+id/id_button"
+        app:layout_constraintEnd_toEndOf="@+id/id_button"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="@+id/id_button"
+        app:layout_constraintTop_toTopOf="@+id/id_button"
+        app:layout_constraintVertical_bias="0.55" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

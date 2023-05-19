@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:layout_marginEnd="120dp"
+            android:background="@drawable/key4"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="260dp"
+            android:layout_marginBottom="5dp"
+            android:text="用户名"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/username_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/username_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/username_edit_text" />
+
+        <EditText
+            android:id="@+id/username_edit_text"
+            android:layout_width="314dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="60dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/password_edit_text" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="275dp"
+            android:layout_marginBottom="5dp"
+            android:text="密码"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/password_edit_text" />
+
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="312dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="290dp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/nickname_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="275dp"
+            android:layout_marginBottom="5dp"
+            android:text="昵称"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/nickname_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/nickname_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/nickname_edit_text" />
+
+        <EditText
+            android:id="@+id/nickname_edit_text"
+            android:layout_width="311dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="60dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/password_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/bg_rounded_blue"
+            android:text="注册"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/nickname_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/nickname_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/nickname_edit_text" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="61dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="230dp"
+            android:gravity="center"
+            android:text="注册"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/username_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/username_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/username_edit_text"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view1"
+            android:layout_width="76dp"
+            android:layout_height="78dp"
+            android:src="@drawable/chatspringlogo"
+            app:layout_constraintBottom_toBottomOf="@+id/logotext"
+            app:layout_constraintEnd_toStartOf="@+id/logotext"
+            app:layout_constraintTop_toTopOf="@+id/logotext"
+            app:layout_constraintVertical_bias="0.523" />
+
+        <TextView
+            android:id="@+id/logotext"
+            android:layout_width="237dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginBottom="100dp"
+            android:gravity="center"
+            android:text="文泉ChatSpring"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/username_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/username_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/username_edit_text" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

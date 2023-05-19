@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--android:background="@drawable/card_background"-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/square_border"
+    tools:context=".appCenter">
+
+    <TextView
+        android:id="@+id/appNameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="文本润色"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/button_run"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/appDescriptionLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="润色每句话"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/button_run"
+        app:layout_constraintEnd_toEndOf="@+id/appNameLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/appNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/appNameLayout" />
+
+    <Button
+        android:id="@+id/button_run"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_rounded_blue"
+        android:text="运行"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerApp"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+    <Spinner
+        android:id="@+id/spinnerApp"
+        android:layout_width="66dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:background="#E4E2E2"
+        android:contentDescription="更多.."
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/button_run"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_run"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="74dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/chat"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
