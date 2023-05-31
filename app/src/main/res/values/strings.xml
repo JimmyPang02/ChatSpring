@@ -2,5 +2,5 @@
     <string name="app_name">ChatSpring</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="AboutUs">ChatSpring是一款基于GPT的AI工具箱\n让你可以创建属于自己的AI应用\n开发者名单\n彭孜勉:负责AppWorkShop的开发及最终风格整合\n李泽涛:负责个人中心的开发和GPT的交互对接\n李炜:负责用户注册登录系统的开发</string>
+    <string name="AboutUs">ChatSpring是一款基于GPT的AI工具箱\n让你可以创建属于自己的AI应用\n开发者名单\n彭孜勉:负责App WorkShop的开发及最终风格整合\n李泽涛:负责App Center的开发和GPT的交互对接\n李炜:负责用户注册登录系统的开发</string>
 </resources>
