@@ -54,11 +54,11 @@
 
     <TextView
         android:id="@+id/content"
-        android:layout_width="254dp"
-        android:layout_height="151dp"
-        android:gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="200dp"
         android:background="@drawable/round_border"
-        android:text="ChatSpring是一款....."
+        android:gravity="center"
+        android:text="@string/AboutUs"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
