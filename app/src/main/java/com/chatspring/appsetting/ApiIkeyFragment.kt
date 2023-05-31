@@ -61,7 +61,7 @@ class ApiIkeyFragment : Fragment() {
         val back_button: Button = view.findViewById(R.id.back_button)
         back_button.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+            transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
             val fragment = if (LoginState.isLoggedIn) MainAfterFragment() else MainFragment()
             transaction?.replace(R.id.fragment_main, fragment)?.commit()
         }

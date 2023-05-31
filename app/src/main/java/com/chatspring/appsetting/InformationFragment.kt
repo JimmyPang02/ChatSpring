@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.BmobUser
@@ -75,7 +76,7 @@ class InformationFragment : Fragment() {
         changeUserButton.setOnClickListener {
             fragmentManager?.beginTransaction()?.apply {
                 //登录状态改为false
-                LoginState.isLoggedIn = false
+//                LoginState.isLoggedIn = false
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
 
                 //设置转场动画
@@ -88,24 +89,49 @@ class InformationFragment : Fragment() {
             }
         }
 
+//        //退出登录按钮
+//        val exitButton: Button = newView.findViewById(R.id.exit_button)
+//        exitButton.setOnClickListener {
+//            fragmentManager?.beginTransaction()?.apply {
+//                //登录状态改为false
+//                LoginState.isLoggedIn = false
+//
+//                val transaction = fragmentManager?.beginTransaction()
+//
+//                //设置转场动画
+//                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+//
+//                transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
+////                replace(R.id.fragment_main, MainFragment())
+////                // 后续可能要增加销毁所有fragment
+////                commit()
+//            }
+//        }
         //退出登录按钮
         val exitButton: Button = newView.findViewById(R.id.exit_button)
         exitButton.setOnClickListener {
-            fragmentManager?.beginTransaction()?.apply {
-                //登录状态改为false
-                LoginState.isLoggedIn = false
+            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+            alertDialogBuilder.setTitle("退出登录")
+            alertDialogBuilder.setMessage("是否确定退出登录？")
+            alertDialogBuilder.setPositiveButton("确定") { dialog, which ->
+                fragmentManager?.beginTransaction()?.apply {
+                    //登录状态改为false
+                    LoginState.isLoggedIn = false
 
-                val transaction = fragmentManager?.beginTransaction()
+                    val transaction = fragmentManager?.beginTransaction()
 
-                //设置转场动画
-                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                    //设置转场动画
+                    transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
 
-                transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
-//                replace(R.id.fragment_main, MainFragment())
-//                // 后续可能要增加销毁所有fragment
-//                commit()
+                    transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
+                }
             }
+            alertDialogBuilder.setNegativeButton("取消") { dialog, which ->
+                // Do nothing
+            }
+            alertDialogBuilder.show()
         }
+
 
         val back_button: Button = newView.findViewById(R.id.back_button)
         back_button.setOnClickListener {
@@ -113,6 +139,14 @@ class InformationFragment : Fragment() {
             //设置转场动画
             transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
             transaction?.replace(R.id.fragment_main, MainAfterFragment())?.commit()
+        }
+
+        val aboutus_button: Button = newView.findViewById(R.id.about_button)
+        aboutus_button.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            //设置转场动画
+            transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+            transaction?.replace(R.id.fragment_main, SettingFragment())?.commit()
         }
 
         return newView

@@ -107,9 +107,9 @@ class LoginFragment : Fragment() {
         val back_button: Button = view.findViewById(R.id.back_button)
         back_button.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            //设置转场动画
             transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-            transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
+            val fragment = if (LoginState.isLoggedIn) InformationFragment() else MainFragment()
+            transaction?.replace(R.id.fragment_main, fragment)?.commit()
         }
         return view
     }
