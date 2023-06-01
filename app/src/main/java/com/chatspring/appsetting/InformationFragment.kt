@@ -20,6 +20,8 @@ import com.chatspring.bmob_data.MyUser
 
 class InformationFragment : Fragment() {
 
+    lateinit var alertDialog: AlertDialog // 声明为 lateinit
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -111,26 +113,47 @@ class InformationFragment : Fragment() {
         val exitButton: Button = newView.findViewById(R.id.exit_button)
         exitButton.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(requireContext())
-            alertDialogBuilder.setTitle("退出登录")
-            alertDialogBuilder.setMessage("是否确定退出登录？")
-            alertDialogBuilder.setPositiveButton("确定") { dialog, which ->
-                fragmentManager?.beginTransaction()?.apply {
-                    //登录状态改为false
-                    LoginState.isLoggedIn = false
+            // 设置自定义布局
+            val customLayout = layoutInflater.inflate(R.layout.promptbox, null)
+            alertDialogBuilder.setView(customLayout)
+            // 在自定义布局中找到按钮并设置点击事件
+            val positiveButton = customLayout.findViewById<Button>(R.id.positive_button)
+            positiveButton.setOnClickListener {
+                // 点击"确定"按钮的操作
+                //登录状态改为false
+                LoginState.isLoggedIn = false
 
-                    val transaction = fragmentManager?.beginTransaction()
+                val transaction = fragmentManager?.beginTransaction()
 
-                    //设置转场动画
-                    transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                //设置转场动画
+                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
 
-                    transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
-                }
+                transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
+                alertDialog.dismiss() // 关闭对话框
             }
-            alertDialogBuilder.setNegativeButton("取消") { dialog, which ->
-                // Do nothing
+            val negativeButton = customLayout.findViewById<Button>(R.id.negative_button)
+            negativeButton.setOnClickListener {
+                // 点击"取消"按钮的操作
+                // ...
+
+                alertDialog.dismiss() // 关闭对话框
             }
-            alertDialogBuilder.show()
+
+            alertDialog = alertDialogBuilder.create() // 在此处初始化
+            alertDialog.show()
         }
+
+
+//            alertDialogBuilder.setPositiveButton("确定") { dialog, which ->
+//                fragmentManager?.beginTransaction()?.apply {
+//
+//                }
+//            }
+//            alertDialogBuilder.setNegativeButton("取消") { dialog, which ->
+//                // Do nothing
+//            }
+//            alertDialogBuilder.show()
+//        }
 
 
         val back_button: Button = newView.findViewById(R.id.back_button)

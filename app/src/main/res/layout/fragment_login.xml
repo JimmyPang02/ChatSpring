@@ -18,10 +18,10 @@
             android:id="@+id/back_button"
             android:layout_width="35dp"
             android:layout_height="33dp"
-            android:layout_marginEnd="120dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/key4"
             app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintEnd_toStartOf="@+id/title"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/title" />
 
         <TextView

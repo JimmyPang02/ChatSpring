@@ -13,7 +13,7 @@ import com.chatspring.R
 
 class ApiIkeyFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var apiurlEditText: EditText
+    //private lateinit var apiurlEditText: EditText
     private lateinit var apikeyEditText: EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,17 +23,17 @@ class ApiIkeyFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         // 找到 EditText 视图
-        apiurlEditText = view.findViewById(R.id.apiurl_edit_text)
+        //apiurlEditText = view.findViewById(R.id.apiurl_edit_text)
         apikeyEditText = view.findViewById(R.id.apikey_edit_text)
 
         // 从 SharedPreferences 中获取已存储的值
-        val storedApiUrl = sharedPreferences.getString("apiUrl", "")
+        //val storedApiUrl = sharedPreferences.getString("apiUrl", "")
         val storedApiKey = sharedPreferences.getString("apiKey", "")
 
         // 如果已存储的值不为空，则设置 EditText 的文本
-        if (storedApiUrl!=null) {
-            apiurlEditText.setText(storedApiUrl)
-        }
+//        if (storedApiUrl!=null) {
+//            apiurlEditText.setText(storedApiUrl)
+//        }
         if (storedApiKey!=null) {
             apikeyEditText.setText(storedApiKey)
         }
@@ -42,12 +42,12 @@ class ApiIkeyFragment : Fragment() {
         val saveButton: Button = view.findViewById(R.id.save_button)
         saveButton.setOnClickListener {
             // 获取输入框的值
-            val apiUrl = apiurlEditText.text.toString()
+            //val apiUrl = apiurlEditText.text.toString()
             val apiKey = apikeyEditText.text.toString()
 
             // 使用 SharedPreferences 存储输入框的值
             val editor = sharedPreferences.edit()
-            editor.putString("apiUrl", apiUrl)
+            //editor.putString("apiUrl", apiUrl)
             editor.putString("apiKey", apiKey)
             editor.apply()
 

@@ -12,48 +12,50 @@
         android:id="@+id/back_button"
         android:layout_width="35dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/key4"
         app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
+
 
     <Button
         android:id="@+id/saveID_button"
         android:layout_width="109dp"
         android:layout_height="62dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/bg_rounded_blue"
         android:text="确定"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginEnd="10dp"
         android:text="昵称"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="197dp"
         android:layout_height="45dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/grey"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintBottom_toTopOf="@+id/saveID_button"
+        app:layout_constraintEnd_toEndOf="@+id/saveID_button"
+        app:layout_constraintStart_toStartOf="@+id/saveID_button" />
 
     <TextView
         android:id="@+id/title"
@@ -65,7 +67,6 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/saveID_button"
-        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="@+id/saveID_button"
         app:layout_constraintTop_toTopOf="parent" />
 

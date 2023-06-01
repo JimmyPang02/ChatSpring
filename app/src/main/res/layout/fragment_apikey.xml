@@ -12,72 +12,44 @@
         android:id="@+id/back_button"
         android:layout_width="35dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/key4"
         app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
 
     <TextView
         android:id="@+id/APIKEY"
         android:layout_width="100dp"
         android:layout_height="39dp"
+        android:layout_marginEnd="100dp"
+        android:gravity="center"
         android:text="API KEY"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
         app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/APIURL"
-        app:layout_constraintVertical_bias="0.963" />
-
-    <EditText
-        android:id="@+id/apiurl_edit_text"
-        android:layout_width="298dp"
-        android:layout_height="69dp"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
-
-    <TextView
-        android:id="@+id/APIURL"
-        android:layout_width="100dp"
-        android:layout_height="43dp"
-        android:text="API URL"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/apiurl_edit_text"
-        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text" />
 
     <EditText
         android:id="@+id/apikey_edit_text"
         android:layout_width="298dp"
         android:layout_height="69dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="150dp"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/apiurl_edit_text" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="109dp"
         android:layout_height="62dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/bg_rounded_blue"
         android:text="保存"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
-        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
         app:layout_constraintTop_toBottomOf="@+id/apikey_edit_text" />
 
@@ -85,23 +57,10 @@
         android:id="@+id/image_view1"
         android:layout_width="49dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="4dp"
         android:src="@drawable/key2"
-        app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
+        app:layout_constraintBottom_toBottomOf="@+id/APIKEY"
         app:layout_constraintEnd_toStartOf="@+id/APIKEY"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text" />
-
-    <ImageView
-        android:id="@+id/image_view2"
-        android:layout_width="45dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/url"
-        app:layout_constraintBottom_toBottomOf="@+id/APIURL"
-        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text" />
+        app:layout_constraintTop_toTopOf="@+id/APIKEY" />
 
     <TextView
         android:id="@+id/title"
@@ -112,8 +71,8 @@
         android:text="API"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/apiurl_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/apiurl_edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
         app:layout_constraintTop_toTopOf="parent" />
 
 

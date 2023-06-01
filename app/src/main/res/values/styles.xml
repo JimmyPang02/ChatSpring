@@ -1,0 +1,5 @@
+<resources>
+    <style name="MyAlertDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+</resources>
