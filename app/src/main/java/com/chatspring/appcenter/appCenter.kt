@@ -2,10 +2,7 @@ package com.chatspring
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.drawable.AnimationDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +18,13 @@ import android.widget.Toast
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import com.chatspring.Model.AppModel
-import com.chatspring.appsetting.LoginFragment
+import com.chatspring.appcenter.CustomSpinnerAdapter
 import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
-import java.lang.Thread.sleep
 import java.util.Timer
 import kotlin.concurrent.schedule
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -218,12 +215,14 @@ class appCenter : Fragment() {
 
         val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
 
-        val spinnerAdapter = ArrayAdapter.createFromResource(
+        val itemsArray = resources.getStringArray(R.array.spinnerApp)
+        val items = itemsArray.toList()
+        val spinnerAdapter = CustomSpinnerAdapter(
             requireContext(),
-            R.array.spinnerApp,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item ,//改成自己的layout
+            items
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -337,12 +336,14 @@ class appCenter : Fragment() {
 
         val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
 
-        val spinnerAdapter = ArrayAdapter.createFromResource(
+        val itemsArray = resources.getStringArray(R.array.spinnerApp)
+        val items = itemsArray.toList()
+        val spinnerAdapter = CustomSpinnerAdapter(
             requireContext(),
-            R.array.spinnerApp,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item ,//改成自己的layout
+            items
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -396,7 +397,6 @@ class appCenter : Fragment() {
 
         }
 
-
         val appName = "起名大师"
         val appDescription = "起个好名字"
         val appPrompt = "下面我将输入一件物品的描述，你需要根据描述起一个好名字："
@@ -430,7 +430,7 @@ class appCenter : Fragment() {
             R.array.spinnerApp,
             android.R.layout.simple_spinner_item
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -564,6 +564,8 @@ class appCenter : Fragment() {
 
             //设置卡片的下拉菜单
             val cardSpinner = it.findViewById<Spinner>(R.id.spinnerApp)
+
+
             //重置下拉菜单
             cardSpinner.setSelection(0)
             cardSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
