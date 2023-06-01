@@ -1,6 +1,7 @@
 package com.chatspring.openAI
 
 import android.content.Context
+import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.*
@@ -9,6 +10,8 @@ import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
 import com.chatspring.GlobalapiKey
+import com.chatspring.R
+import com.chatspring.appsetting.SettingFragment
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

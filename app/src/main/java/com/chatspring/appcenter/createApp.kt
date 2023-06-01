@@ -74,6 +74,12 @@ class createApp : Fragment() {
         setPrompt = view?.findViewById(R.id.setPrompt)
         button_finish?.setOnClickListener {
 
+            //检测setAppName是否为空
+            if (setAppName?.text.toString() == "") {
+                Toast.makeText(activity, "请输入应用名称", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             //上传到Bmob云数据库
             val model = AppCenterCard()
@@ -126,6 +132,16 @@ class createApp : Fragment() {
         }
         var coroutineRunning = false
         button_test?.setOnClickListener {
+
+            val apiKey = GlobalapiKey
+            //检测apiKey是否为空
+            if (apiKey == "") {
+                Toast.makeText(activity, "未设置API Key，请前往设置界面填入API Key", Toast.LENGTH_SHORT).show()
+                //写入textView_resultShow
+                textView_resultShow?.text = "未设置API Key，请前往设置界面填入API Key"
+                return@setOnClickListener
+            }
+
 
             if (!coroutineRunning) {
                 button_test?.isEnabled = false

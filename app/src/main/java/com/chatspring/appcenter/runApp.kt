@@ -128,6 +128,16 @@ class runApp : Fragment() {
 
 
         button_execute?.setOnClickListener {
+
+            val apiKey = GlobalapiKey
+            //检测apiKey是否为空
+            if (apiKey == "") {
+                Toast.makeText(activity, "未设置API Key，请前往设置界面填入API Key", Toast.LENGTH_SHORT).show()
+                //写入textView_resultShow
+                textView_resultShow?.text = "未设置API Key，请前往设置界面填入API Key"
+                return@setOnClickListener
+            }
+
             if (!coroutineRunning) {
                 button_execute?.isEnabled = false
                 coroutineRunning = true
