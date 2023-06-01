@@ -3,6 +3,7 @@
         <item name="android:textColor">@color/dark_blue</item>
     </style>
     <style name="SpinnerTextStyle" parent="android:Widget.TextView.SpinnerItem">
-        <item name="android:textSize">5sp</item> <!-- 调整字体大小为10sp -->
+        <item name="android:textSize">5sp</item> <!-- 调整字体大小为10sp  -->
+<!--        这个地方生效不了-->
     </style>
 </resources>
