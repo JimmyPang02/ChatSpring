@@ -3,7 +3,6 @@ package com.chatspring
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,8 @@ import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -25,11 +22,9 @@ import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
 import com.chatspring.Model.AppModel
-import com.chatspring.appcenter.CustomSpinnerAdapter
 import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
-import com.chatspring.bmob_data.MyUser
 import java.util.Timer
 import kotlin.concurrent.schedule
 
@@ -51,11 +46,6 @@ var GlobalapiKey = ""
 var initial: Int = 1
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AppCenter.newInstance] factory method to
- * create an instance of this fragment.
- */
 class appCenter : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -123,7 +113,8 @@ class appCenter : Fragment() {
 
         }
 
-        val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
         // 判断用户是否登陆
@@ -135,27 +126,21 @@ class appCenter : Fragment() {
             transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
         } else {
 
-
-            // 如果用户已经登陆，获取用户名
-            //从本地的sharedPreference中获取用户名，设置名为my_preferences.xml
-            // 获取 SharedPreferences 对象
-//            val sharedPreferences =
-//                requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
             LoginState.isLoggedIn = true
             // 获取用户名字段的值
             val username = sharedPreferences.getString("username", "")
             val password = sharedPreferences.getString("password", "")
             GlobaluserName = username.toString()
             val userlogin = BmobUser()
-            Bmob.initialize(requireContext(),"032b1bb187d4fc1e9cad0ba73d98004f")
+            Bmob.initialize(requireContext(), "032b1bb187d4fc1e9cad0ba73d98004f")
             userlogin.username = username.toString()
             userlogin.setPassword(password.toString())
             userlogin.login(object : SaveListener<BmobUser>() {
                 override fun done(bmobUser: BmobUser?, e: BmobException?) {
                     if (e == null) {
-                        Toast.makeText(requireContext(), bmobUser?.username + "登录成功", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), bmobUser?.username + "登录成功", Toast.LENGTH_SHORT).show()
                     } else {
-                        Log.e("登录失败", "原因: ", e)
+                        //Log.e("登录失败", "原因: ", e)
                     }
                 }
             })
@@ -187,24 +172,6 @@ class appCenter : Fragment() {
         }
 
 
-//        //渲染完成页面后，自动执行下述代码
-//        view?.post {
-//            var preLength = 0
-//            var currentLength: Int
-//            Timer().schedule(0, 1000) {
-//                // 定时任务中使用 Handler 将操作发布到 UI 线程
-//                Handler(Looper.getMainLooper()).post {
-//                    //判断是否有新的卡片加入
-//                    currentLength = cardViewList.size
-//                    if (currentLength > preLength) {
-//                        preLength = currentLength
-//                        root_layout?.removeAllViews()
-//                        loadAppCard()
-//                    }
-//                }
-//            }
-//        }
-
         //接受传入的changed
         val bundle = arguments
         if (bundle != null) {
@@ -232,216 +199,6 @@ class appCenter : Fragment() {
 
         // Inflate the layout for this fragment
         return view
-    }
-
-    private fun addCard(root_layout: LinearLayout?) {
-        val cardView = layoutInflater.inflate(R.layout.card_layout, null)
-
-        val button = cardView.findViewById<Button>(R.id.button_run)
-
-        val spinner = cardView.findViewById<Spinner>(R.id.spinnerApp)
-
-        val appNameLayout = cardView.findViewById<TextView>(R.id.appNameLayout)
-
-        val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
-
-        val itemsArray = resources.getStringArray(R.array.spinnerApp)
-        val items = itemsArray.toList()
-        val spinnerAdapter = CustomSpinnerAdapter(
-            requireContext(),
-            R.layout.custom_spinner_item ,//改成自己的layout
-            items
-        )
-        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
-        spinner?.adapter = spinnerAdapter
-
-        spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (position) {
-                    1 -> {  // 修改按钮选择时
-                        //提取cardViewList中的最后一个cardView的位置
-                        val index = cardViewList.size - 1
-                        //传递index给modifyApp
-                        val bundle = Bundle()
-                        bundle.putInt("index", index)
-                        val modifyApp = modifyApp()
-                        modifyApp.arguments = bundle
-                        val transaction = activity?.supportFragmentManager?.beginTransaction()
-                        transaction?.setCustomAnimations(
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left
-                        )
-                        transaction?.replace(R.id.fragment_main, modifyApp)?.commit()
-                    }
-
-                    2 -> {  // 删除按钮选择时
-                        //提取cardViewList中的最后一个cardView的位置
-                        val index = cardViewList.size - 1
-                        //传递index给deleteApp
-                        val bundle = Bundle()
-                        bundle.putInt("index", index)
-                        val deleteApp = deleteApp()
-                        deleteApp.arguments = bundle
-                        val transaction = activity?.supportFragmentManager?.beginTransaction()
-                        transaction?.setCustomAnimations(
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left
-                        )
-                        transaction?.replace(R.id.fragment_main, deleteApp)?.commit()
-
-                    }
-
-                    3 -> {  // 分享按钮选择时
-                        //提取cardViewList中的最后一个cardView的位置
-                        val index = cardViewList.size - 1
-                        //传递index给shareApp
-                        val bundle = Bundle()
-                        bundle.putInt("index", index)
-                        val shareApp = shareApp()
-                        shareApp.arguments = bundle
-                        val transaction = activity?.supportFragmentManager?.beginTransaction()
-                        transaction?.setCustomAnimations(
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left
-                        )
-                        transaction?.replace(R.id.fragment_main, shareApp)?.commit()
-                    }
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // 未选择任何选项时的逻辑
-            }
-        }
-
-        //检测传入参数
-        val bundle = arguments
-        val appName = bundle?.getString("appName")
-        val appDescription = bundle?.getString("appDescription")
-        val appPrompt = bundle?.getString("appPrompt")
-
-        appNameLayout.text = appName
-        appDescriptionLayout.text = appDescription
-
-
-        val model = AppModel(appName, appDescription, appPrompt)
-        cardModelList.add(model)
-
-        //点击运行按钮，跳转到RunAppFragment
-        button?.setOnClickListener {
-            //把模型数据传递给RunAppFragment
-            val bundle = Bundle()
-            bundle.putString("appName", model.appName)
-            bundle.putString("appDescription", model.appDescription)
-            bundle.putString("appPrompt", model.appPrompt)
-            val runApp = runApp()
-            runApp.arguments = bundle
-            //设置转场动画
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-            transaction?.replace(R.id.fragment_main, runApp)?.commit()
-
-        }
-
-        cardViewList.add(cardView)
-
-
-        root_layout?.addView(cardView, 0)
-
-    }
-
-    private fun preloadCard() {
-        val cardView = layoutInflater.inflate(R.layout.card_layout, null)
-
-        val button = cardView.findViewById<Button>(R.id.button_run)
-
-        val spinner = cardView.findViewById<Spinner>(R.id.spinnerApp)
-
-        val appNameLayout = cardView.findViewById<TextView>(R.id.appNameLayout)
-
-        val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
-
-        val itemsArray = resources.getStringArray(R.array.spinnerApp)
-        val items = itemsArray.toList()
-        val spinnerAdapter = CustomSpinnerAdapter(
-            requireContext(),
-            R.layout.custom_spinner_item ,//改成自己的layout
-            items
-        )
-        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
-        spinner?.adapter = spinnerAdapter
-
-        spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (position) {
-                    1 -> {  // 修改按钮选择时
-                        activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(R.id.fragment_main, modifyApp())?.commit()
-                    }
-
-                    2 -> {  // 删除按钮选择时
-                        //提取cardViewList中的最后一个cardView的位置
-                        val index = cardViewList.size - 1
-                        //传递index给deleteApp
-                        val bundle = Bundle()
-                        bundle.putInt("index", index)
-                        val deleteApp = deleteApp()
-                        deleteApp.arguments = bundle
-                        val transaction = activity?.supportFragmentManager?.beginTransaction()
-                        transaction?.setCustomAnimations(
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left
-                        )
-                        transaction?.replace(R.id.fragment_main, deleteApp)?.commit()
-
-                    }
-
-                    3 -> {  // 分享按钮选择时
-                        activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(R.id.fragment_main, shareApp())?.commit()
-                    }
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // 未选择任何选项时的逻辑
-            }
-        }
-
-        //点击运行按钮，跳转到RunAppFragment
-        button?.setOnClickListener {
-            //设置转场动画
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-            transaction?.replace(R.id.fragment_main, runApp())?.commit()
-
-        }
-
-        val appName = "起名大师"
-        val appDescription = "起个好名字"
-        val appPrompt = "下面我将输入一件物品的描述，你需要根据描述起一个好名字："
-
-        appNameLayout.text = appName
-        appDescriptionLayout.text = appDescription
-
-        val AppModel = AppModel(appName, appDescription, appPrompt)
-        cardModelList.add(AppModel)
-
-
-        cardViewList.add(cardView)
-
-
-        root_layout?.addView(cardView, 0)
     }
 
     fun view_controller(appName: String?, appDescription: String?, appPrompt: String?) {
@@ -591,6 +348,42 @@ class appCenter : Fragment() {
                 transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 transaction?.replace(R.id.fragment_main, runApp)?.commit()
             }
+
+
+            val appNameLayout = it.findViewById<TextView>(R.id.appNameLayout)
+            val appDescriptionLayout = it.findViewById<TextView>(R.id.appDescriptionLayout)
+            //设置appNameLayout的监听
+            appNameLayout.setOnClickListener {
+                // 修改按钮选择时
+                //传递index给modifyApp
+                val bundle = Bundle()
+                bundle.putInt("index", index)
+                val modifyApp = modifyApp()
+                modifyApp.arguments = bundle
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                transaction?.setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
+                transaction?.replace(R.id.fragment_main, modifyApp)?.commit()
+            }
+
+            //设置appDescriptionLayout的监听
+            appDescriptionLayout.setOnClickListener {
+                // 修改按钮选择时
+                //传递index给modifyApp
+                val bundle = Bundle()
+                bundle.putInt("index", index)
+                val modifyApp = modifyApp()
+                modifyApp.arguments = bundle
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                transaction?.setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
+                transaction?.replace(R.id.fragment_main, modifyApp)?.commit()
+            }
+
 
             //设置卡片的下拉菜单
             val cardSpinner = it.findViewById<Spinner>(R.id.spinnerApp)
