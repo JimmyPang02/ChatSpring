@@ -1,7 +1,9 @@
 package com.chatspring
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -20,9 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //更改顶部颜色
-        supportActionBar?.hide()
         val window: Window = window
-        window.statusBarColor = resources.getColor(R.color.dark_blue)
+        window.statusBarColor = resources.getColor(R.color.white_trans)//白色半透明
+        //更改顶部字体颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val decorView = window.decorView
+            decorView.systemUiVisibility = decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
 
 
         // 初始化BMOB
