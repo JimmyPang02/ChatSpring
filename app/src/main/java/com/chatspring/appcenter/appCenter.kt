@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -74,12 +75,8 @@ class appCenter : Fragment() {
         val view = inflater.inflate(R.layout.fragment_app_center, container, false)
 
 
-        //加入空白页面激活滚动
-        val blankScreen = inflater.inflate(R.layout.blank_screen, null)
-        root_layout?.addView(blankScreen)
-
-
         root_layout = view?.findViewById(R.id.root_layout)
+
 
         val refresh = view?.findViewById<ImageButton>(R.id.refresh)
 
@@ -89,6 +86,10 @@ class appCenter : Fragment() {
         rotation.interpolator = LinearInterpolator()
         refresh?.setOnClickListener {
             root_layout?.removeAllViews()
+            //加入空白页面激活滚动
+            val blankScreen = inflater.inflate(R.layout.blank_screen, null)
+            //往末尾加入
+            root_layout?.addView(blankScreen)
             val model = AppCenterCard()
             cardViewList.clear()
             cardModelList.clear()
@@ -154,6 +155,10 @@ class appCenter : Fragment() {
         view?.post {
             root_layout?.removeAllViews()
             loadAppCard()
+            //加入空白页面激活滚动
+            val blankScreen = inflater.inflate(R.layout.blank_screen, null)
+            //往末尾加入
+            root_layout?.addView(blankScreen)
         }
 
 

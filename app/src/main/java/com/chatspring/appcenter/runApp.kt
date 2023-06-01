@@ -107,6 +107,7 @@ class runApp : Fragment() {
         val prompt: String = appPrompt.toString()
         var input = textView_Input?.text.toString()
         var coroutineRunning = false
+        val mainScrollView = view?.findViewById<ScrollView>(R.id.mainScrollView)
 
         //设置textView_resultShow的最低高度
         textView_resultShow?.getViewTreeObserver()?.addOnGlobalLayoutListener(
@@ -120,9 +121,18 @@ class runApp : Fragment() {
             })
 
 
-        //监听textView_resultShow的高度变化，如果高度变化，就滚动到最底部
-        scrollView2?.getViewTreeObserver()?.addOnGlobalLayoutListener() {
-            scrollView2.fullScroll(View.FOCUS_DOWN);
+        //渲染完成后执行
+        mainScrollView?.post {
+            var flag = 0
+
+            //监听textView_resultShow的高度变化，如果高度变化，就滚动到mainScrollView最底部
+            mainScrollView.getViewTreeObserver()?.addOnGlobalLayoutListener() {
+                if (flag == 1) {
+                    mainScrollView.fullScroll(View.FOCUS_DOWN);
+                } else {
+                    flag = 1
+                }
+            }
         }
 
 
@@ -132,7 +142,11 @@ class runApp : Fragment() {
             val apiKey = GlobalapiKey
             //检测apiKey是否为空
             if (apiKey == "") {
-                Toast.makeText(activity, "未设置API Key，请前往设置界面填入API Key", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "未设置API Key，请前往设置界面填入API Key",
+                    Toast.LENGTH_SHORT
+                ).show()
                 //写入textView_resultShow
                 textView_resultShow?.text = "未设置API Key，请前往设置界面填入API Key"
                 return@setOnClickListener

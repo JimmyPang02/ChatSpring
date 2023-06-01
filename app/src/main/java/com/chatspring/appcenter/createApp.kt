@@ -57,6 +57,8 @@ class createApp : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_create_app, container, false)
+
+
         //点击取消按钮，跳转到AppCenterFragment
         button_cancel = view?.findViewById(R.id.button_cancel_modify)
         button_cancel?.setOnClickListener {
@@ -114,6 +116,7 @@ class createApp : Fragment() {
         setTestData = view?.findViewById(R.id.setTestData)
         val setPrompt = view?.findViewById<TextView>(R.id.setPrompt)
         val scrollView2 = view?.findViewById<ScrollView>(R.id.scrollView)
+        val mainScrollView = view?.findViewById<ScrollView>(R.id.mainScrollView)
         //设置textView_resultShow的最低高度
         textView_resultShow?.getViewTreeObserver()?.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -126,17 +129,32 @@ class createApp : Fragment() {
             })
 
 
-        //监听textView_resultShow的高度变化，如果高度变化，就滚动到最底部
-        scrollView2?.getViewTreeObserver()?.addOnGlobalLayoutListener() {
-            scrollView2.fullScroll(View.FOCUS_DOWN);
+        //渲染完成后执行
+        mainScrollView?.post {
+            var flag = 0
+
+            //监听textView_resultShow的高度变化，如果高度变化，就滚动到mainScrollView最底部
+            mainScrollView.getViewTreeObserver()?.addOnGlobalLayoutListener() {
+                if (flag == 1) {
+                    mainScrollView.fullScroll(View.FOCUS_DOWN);
+                } else {
+                    flag = 1
+                }
+            }
         }
+
+
         var coroutineRunning = false
         button_test?.setOnClickListener {
 
             val apiKey = GlobalapiKey
             //检测apiKey是否为空
             if (apiKey == "") {
-                Toast.makeText(activity, "未设置API Key，请前往设置界面填入API Key", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "未设置API Key，请前往设置界面填入API Key",
+                    Toast.LENGTH_SHORT
+                ).show()
                 //写入textView_resultShow
                 textView_resultShow?.text = "未设置API Key，请前往设置界面填入API Key"
                 return@setOnClickListener
