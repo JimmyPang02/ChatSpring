@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import com.chatspring.Model.AppModel
 import com.chatspring.appsetting.LoginFragment
@@ -80,10 +82,7 @@ class appCenter : Fragment() {
         root_layout?.addView(blankScreen)
 
 
-
-
         root_layout = view?.findViewById(R.id.root_layout)
-
 
         val refresh = view?.findViewById<ImageButton>(R.id.refresh)
 
@@ -535,6 +534,15 @@ class appCenter : Fragment() {
             //清空所有cardViewList的所有parent
             val parent = it.parent as ViewGroup
             parent.removeView(it)
+
+            // 设置卡片的下边距
+            val marginBottomInDp = 8
+            val marginBottomInPx = (marginBottomInDp * it.resources.displayMetrics.density).toInt()
+            val layoutParams = it.layoutParams as? ViewGroup.MarginLayoutParams
+            layoutParams?.updateMargins(bottom = marginBottomInPx)
+            it.layoutParams = layoutParams
+
+            // 将卡片添加到根视图
             root_layout?.addView(it, 0)
 
             val cardButton = it.findViewById<Button>(R.id.button_run)

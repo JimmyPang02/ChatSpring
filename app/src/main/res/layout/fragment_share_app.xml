@@ -26,7 +26,7 @@
         android:layout_marginStart="94dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="95dp"
-        android:text="是否分享该应用到商场？"
+        android:text="是否分享该应用到应用工坊？"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
