@@ -26,20 +26,29 @@ class RegisterFragment : Fragment() {
         // 获取注册按钮并添加点击事件
         val registerButton: Button = view.findViewById<Button>(R.id.register_button)
         registerButton.setOnClickListener {
+            // 获取输入的昵称、用户名和密码
+            val nickname = view.findViewById<EditText>(R.id.nickname_edit_text).text.toString()
+            val username = view.findViewById<EditText>(R.id.username_edit_text).text.toString()
+            val password = view.findViewById<EditText>(R.id.password_edit_text).text.toString()
+
+            // 检查内容是否为空
+            if (nickname.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(requireContext(), "请填写完整的注册信息", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // 创建MyUser实例并设置相关属性
             val myUser = MyUser()
-            myUser.nickname =
-                view.findViewById<EditText>(R.id.nickname_edit_text).text.toString() // 设置昵称为UserID
-            myUser.username =
-                view.findViewById<EditText>(R.id.username_edit_text).text.toString() // 设置用户名
-            myUser.setPassword(view.findViewById<EditText>(R.id.password_edit_text).text.toString()) // 设置密码
+            myUser.nickname = nickname
+            myUser.username = username
+            myUser.setPassword(password)
 
             // 调用signUp方法进行注册
             myUser.signUp(object : SaveListener<MyUser>() {
                 override fun done(myUser: MyUser?, e: BmobException?) {
                     if (e == null) {
                         val username = myUser?.username.toString()
-                        //上传到Bmob云数据库
+                        // 上传到Bmob云数据库
                         val model = AppCenterCard()
 
                         model.create_card(
@@ -61,27 +70,27 @@ class RegisterFragment : Fragment() {
                             username,
                         )
 
-
                         // 注册成功，返回到登录页面
                         Toast.makeText(requireContext(), "注册成功", Toast.LENGTH_SHORT).show()
                         val transaction = activity?.supportFragmentManager?.beginTransaction()
-                        //设置转场动画
+                        // 设置转场动画
                         transaction?.setCustomAnimations(
                             R.anim.slide_in_right,
                             R.anim.slide_out_left
                         )
                         transaction?.replace(R.id.fragment_main, LoginFragment())?.commit()
                     } else {
-                        // 注册失败，弹出提示框
-                        Toast.makeText(
-                            requireContext(),
-                            "账号已被注册，请重新输入账号！",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        // 注册失败，检查特定异常
+                        if (e.errorCode == 202) {
+                            Toast.makeText(requireContext(), "该账号已被注册，请重新输入账号！", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "注册失败：" + e.message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             })
         }
+
         val back_button: Button = view.findViewById(R.id.back_button)
         back_button.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()

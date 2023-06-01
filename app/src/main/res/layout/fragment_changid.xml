@@ -52,6 +52,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/grey"
+        android:backgroundTint="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/saveID_button"
         app:layout_constraintEnd_toEndOf="@+id/saveID_button"

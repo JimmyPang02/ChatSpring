@@ -2,10 +2,8 @@ package com.chatspring
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.drawable.AnimationDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.TypedValue
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +11,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Spinner
@@ -20,14 +19,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
+import cn.bmob.v3.Bmob
+import cn.bmob.v3.BmobUser
+import cn.bmob.v3.exception.BmobException
+import cn.bmob.v3.listener.SaveListener
 import com.chatspring.Model.AppModel
-import com.chatspring.appsetting.LoginFragment
 import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
-import java.lang.Thread.sleep
+import com.chatspring.bmob_data.MyUser
 import java.util.Timer
 import kotlin.concurrent.schedule
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -118,8 +121,11 @@ class appCenter : Fragment() {
 
         }
 
+        val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
         // 判断用户是否登陆
-        if (!LoginState.isLoggedIn) {
+        if (!isLoggedIn) {
             // 如果用户没有登陆，跳转到登陆界面,并且弹出消息框
             Toast.makeText(requireContext(), "请先登陆", Toast.LENGTH_SHORT).show()
             val transaction = activity?.supportFragmentManager?.beginTransaction()
@@ -127,20 +133,35 @@ class appCenter : Fragment() {
             transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
         } else {
 
+
             // 如果用户已经登陆，获取用户名
             //从本地的sharedPreference中获取用户名，设置名为my_preferences.xml
             // 获取 SharedPreferences 对象
-            val sharedPreferences =
-                requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-
+//            val sharedPreferences =
+//                requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+            LoginState.isLoggedIn = true
             // 获取用户名字段的值
             val username = sharedPreferences.getString("username", "")
+            val password = sharedPreferences.getString("password", "")
             GlobaluserName = username.toString()
+            val userlogin = BmobUser()
+            Bmob.initialize(requireContext(),"032b1bb187d4fc1e9cad0ba73d98004f")
+            userlogin.username = username.toString()
+            userlogin.setPassword(password.toString())
+            userlogin.login(object : SaveListener<BmobUser>() {
+                override fun done(bmobUser: BmobUser?, e: BmobException?) {
+                    if (e == null) {
+                        Toast.makeText(requireContext(), bmobUser?.username + "登录成功", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Log.e("登录失败", "原因: ", e)
+                    }
+                }
+            })
 
             val sharedPreferences2 =
                 requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-            // 获取用户名字段的值
+            // 获取apikey字段的值
             val apiKey = sharedPreferences2.getString("apiKey", "")
             GlobalapiKey = apiKey.toString()
 

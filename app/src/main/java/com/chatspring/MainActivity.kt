@@ -1,5 +1,6 @@
 package com.chatspring
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +11,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cn.bmob.v3.Bmob
+import cn.bmob.v3.BmobUser
 import com.chatspring.appsetting.LoginState
+import com.chatspring.bmob_data.MyUser
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //更改顶部颜色
         val window: Window = window
         window.statusBarColor = resources.getColor(R.color.white_trans)//白色半透明
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
         // 设置导航栏的点击事件
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -68,14 +71,17 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.settings -> {
-                    if (!LoginState.isLoggedIn) {
+                    val sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+                    if (!isLoggedIn) {
                         // 切换到 AppSetting （未登录）
                         val navOptions = NavOptions.Builder()
                             .setLaunchSingleTop(true)
                             .build()
                         navController.navigate(R.id.AppSetting_notlogin, null, navOptions)
                     }
-                    else if(LoginState.isLoggedIn){
+                    else if(isLoggedIn){
                         // 切换到 AppSetting (已登录)
                         val navOptions = NavOptions.Builder()
                             .setLaunchSingleTop(true)

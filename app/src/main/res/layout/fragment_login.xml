@@ -42,6 +42,7 @@
             android:layout_height="57dp"
             android:layout_marginBottom="60dp"
             android:inputType="text"
+            android:backgroundTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
             app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
             app:layout_constraintStart_toStartOf="@+id/password_edit_text" />
@@ -108,7 +109,7 @@
             android:layout_width="237dp"
             android:layout_height="57dp"
             android:layout_marginStart="70dp"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="130dp"
             android:text="文泉ChatSpring"
             android:textColor="@color/black"
             android:textSize="30dp"

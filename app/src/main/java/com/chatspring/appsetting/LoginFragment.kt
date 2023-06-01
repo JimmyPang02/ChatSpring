@@ -27,6 +27,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         // 获取注册按钮并添加点击事件
         val registerButton: Button = view.findViewById(R.id.register_button)
         registerButton.setOnClickListener {
@@ -67,9 +69,11 @@ class LoginFragment : Fragment() {
                             LoginState.isLoggedIn = true
 
                             // 在登录成功后，将账号信息存储在 SharedPreferences 中
-                            val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+
                             val editor = sharedPreferences.edit()
                             editor.putString("username", username)
+                            editor.putString("password", password)
+                            editor.putBoolean("isLoggedIn", true)
                             editor.apply()
 
                             // 登录成功，跳转到成功主界面

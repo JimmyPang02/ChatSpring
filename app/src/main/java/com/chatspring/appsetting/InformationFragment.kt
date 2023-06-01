@@ -22,6 +22,16 @@ class InformationFragment : Fragment() {
 
     lateinit var alertDialog: AlertDialog // 声明为 lateinit
 
+    // 存储登录状态和用户信息
+    private fun saveLoginStatus(context: Context, isLoggedIn: Boolean, username: String, password: String) {
+        val sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isLoggedIn", isLoggedIn)
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.apply()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -122,6 +132,10 @@ class InformationFragment : Fragment() {
                 // 点击"确定"按钮的操作
                 //登录状态改为false
                 LoginState.isLoggedIn = false
+                val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                val username = sharedPreferences.getString("username", "").toString()
+                val password = sharedPreferences.getString("password", "").toString()
+                saveLoginStatus(requireContext(), false, username, password)
 
                 val transaction = fragmentManager?.beginTransaction()
 
