@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +25,7 @@ import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
 import com.chatspring.Model.AppModel
+import com.chatspring.appcenter.CustomSpinnerAdapter
 import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
@@ -80,12 +82,8 @@ class appCenter : Fragment() {
         val view = inflater.inflate(R.layout.fragment_app_center, container, false)
 
 
-        //加入空白页面激活滚动
-        val blankScreen = inflater.inflate(R.layout.blank_screen, null)
-        root_layout?.addView(blankScreen)
-
-
         root_layout = view?.findViewById(R.id.root_layout)
+
 
         val refresh = view?.findViewById<ImageButton>(R.id.refresh)
 
@@ -95,6 +93,10 @@ class appCenter : Fragment() {
         rotation.interpolator = LinearInterpolator()
         refresh?.setOnClickListener {
             root_layout?.removeAllViews()
+            //加入空白页面激活滚动
+            val blankScreen = inflater.inflate(R.layout.blank_screen, null)
+            //往末尾加入
+            root_layout?.addView(blankScreen)
             val model = AppCenterCard()
             cardViewList.clear()
             cardModelList.clear()
@@ -178,6 +180,10 @@ class appCenter : Fragment() {
         view?.post {
             root_layout?.removeAllViews()
             loadAppCard()
+            //加入空白页面激活滚动
+            val blankScreen = inflater.inflate(R.layout.blank_screen, null)
+            //往末尾加入
+            root_layout?.addView(blankScreen)
         }
 
 
@@ -239,12 +245,14 @@ class appCenter : Fragment() {
 
         val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
 
-        val spinnerAdapter = ArrayAdapter.createFromResource(
+        val itemsArray = resources.getStringArray(R.array.spinnerApp)
+        val items = itemsArray.toList()
+        val spinnerAdapter = CustomSpinnerAdapter(
             requireContext(),
-            R.array.spinnerApp,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item ,//改成自己的layout
+            items
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -358,12 +366,14 @@ class appCenter : Fragment() {
 
         val appDescriptionLayout = cardView.findViewById<TextView>(R.id.appDescriptionLayout)
 
-        val spinnerAdapter = ArrayAdapter.createFromResource(
+        val itemsArray = resources.getStringArray(R.array.spinnerApp)
+        val items = itemsArray.toList()
+        val spinnerAdapter = CustomSpinnerAdapter(
             requireContext(),
-            R.array.spinnerApp,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item ,//改成自己的layout
+            items
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -417,7 +427,6 @@ class appCenter : Fragment() {
 
         }
 
-
         val appName = "起名大师"
         val appDescription = "起个好名字"
         val appPrompt = "下面我将输入一件物品的描述，你需要根据描述起一个好名字："
@@ -451,7 +460,7 @@ class appCenter : Fragment() {
             R.array.spinnerApp,
             android.R.layout.simple_spinner_item
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item)
         spinner?.adapter = spinnerAdapter
 
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -585,6 +594,8 @@ class appCenter : Fragment() {
 
             //设置卡片的下拉菜单
             val cardSpinner = it.findViewById<Spinner>(R.id.spinnerApp)
+
+
             //重置下拉菜单
             cardSpinner.setSelection(0)
             cardSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

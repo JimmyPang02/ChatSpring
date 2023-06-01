@@ -7,135 +7,146 @@
     android:background="@color/white"
     tools:context=".runApp">
 
-    <Button
-        android:id="@+id/button_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_rounded_blue"
-        android:text="返回"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/button_execute"
-        app:layout_constraintStart_toStartOf="@+id/button_execute"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <Button
-        android:id="@+id/button_copy_result"
-        android:layout_width="88dp"
-        android:layout_height="35dp"
-
-        android:background="@drawable/bg_rounded_gray"
-        android:text="复制"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_description2"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2" />
-
-    <TextView
-        android:id="@+id/textView_description2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="185dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="186dp"
-        android:text="结果"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_execute" />
-
-    <TextView
-        android:id="@+id/textView_appInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="165dp"
-        android:gravity="center"
-        android:text="文本润色"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="润色所说的每句话"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_appInfo" />
-
-    <EditText
-        android:id="@+id/textView_Input"
-        android:layout_width="0dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/round_border_sm"
-        android:ems="10"
-        android:gravity="top|left"
-        android:hint="请输入发送内容"
-        android:inputType="textMultiLine"
-        android:minHeight="12dp"
-        android:padding="12dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_description" />
-
-    <Button
-        android:id="@+id/button_execute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="162dp"
-        android:background="@drawable/bg_rounded_blue"
-        android:text="运行"
-        android:textColor="@android:color/white"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Input" />
-
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/mainScrollView"
         android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintEnd_toEndOf="@+id/textView_Input"
-        app:layout_constraintStart_toStartOf="@+id/textView_Input"
-        app:layout_constraintTop_toBottomOf="@+id/button_copy_result">
-
-        <TextView
-            android:id="@+id/textView_resultShow"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/round_border_sm"
-            android:ems="10"
-            android:gravity="top|left"
-            android:hint="应答显示区域"
-            android:inputType="textMultiLine"
-            android:minHeight="12dp"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            android:paddingTop="6dp"
-            android:scrollbars="vertical"
-            android:textSize="16sp" />
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_Input"
+                app:layout_constraintStart_toStartOf="@+id/textView_Input"
+                app:layout_constraintTop_toBottomOf="@+id/button_copy_result">
+
+                <TextView
+                    android:id="@+id/textView_resultShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_border_sm"
+                    android:ems="10"
+                    android:gravity="top|left"
+                    android:hint="应答显示区域"
+                    android:inputType="textMultiLine"
+                    android:minHeight="12dp"
+                    android:padding="12dp"
+                    android:paddingTop="6dp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/textView_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="润色所说的每句话"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_appInfo" />
+
+            <Button
+                android:id="@+id/button_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_rounded_blue"
+                android:text="返回"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+                app:layout_constraintStart_toStartOf="@+id/scrollView2"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+            <TextView
+                android:id="@+id/textView_description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="结果"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_execute"
+                app:layout_constraintStart_toStartOf="@+id/button_execute"
+                app:layout_constraintTop_toBottomOf="@+id/button_execute" />
+
+            <EditText
+                android:id="@+id/textView_Input"
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/round_border_sm"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="请输入发送内容"
+                android:inputType="textMultiLine"
+                android:minHeight="12dp"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_description" />
+
+            <Button
+                android:id="@+id/button_copy_result"
+                android:layout_width="88dp"
+                android:layout_height="35dp"
+
+                android:background="@drawable/bg_rounded_gray"
+                android:text="复制"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_description2"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView2" />
+
+            <Button
+                android:id="@+id/button_execute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_rounded_blue"
+                android:text="运行"
+
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/textView_Input"
+                app:layout_constraintStart_toStartOf="@+id/textView_Input"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Input" />
+
+            <TextView
+                android:id="@+id/textView_appInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="文本润色"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
