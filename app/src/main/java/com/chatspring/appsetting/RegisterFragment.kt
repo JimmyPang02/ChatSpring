@@ -41,12 +41,26 @@ class RegisterFragment : Fragment() {
                         val username = myUser?.username.toString()
                         //上传到Bmob云数据库
                         val model = AppCenterCard()
+
+                        model.create_card(
+                            "Slogan一键生成",
+                            "输入你的产品名称和最主要功能，将为你创建一句更吸引人的广告语Slogan",
+                            "我想让你帮我撰写一句经典、有冲击力的应用开屏广告语，接下来我将提供我的产品名和核心功能，如下：",
+                            username,
+                        )
+                        model.create_card(
+                            "句子转表情",
+                            "用表情包把语句的内容展示出来",
+                            "我要你把我写的句子翻译成表情符号。我会写句子，你会用表情符号表达它。我只是想让你用表情符号来表达它。除了表情符号，我不希望你回复任何内容。当我需要用英语告诉你一些事情时，我会用 {like this} 这样的大括号括起来。我的第一句话是：",
+                            username,
+                        )
                         model.create_card(
                             "想聊就聊",
                             "想聊啥就聊啥",
                             "",
                             username,
                         )
+
 
                         // 注册成功，返回到登录页面
                         Toast.makeText(requireContext(), "注册成功", Toast.LENGTH_SHORT).show()

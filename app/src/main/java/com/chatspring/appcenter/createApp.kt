@@ -1,15 +1,24 @@
 package com.chatspring
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Button
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
+import com.aallam.openai.api.BetaOpenAI
 import com.chatspring.bmob_data.AppCenterCard
+import com.chatspring.openAI.chatGPT_flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +39,9 @@ class createApp : Fragment() {
     private var setAppName: TextView? = null
     private var textView_Input: TextView? = null
     private var setPrompt: TextView? = null
+    private var button_test: Button? = null
+    private var textView_resultShow: TextView? = null
+    private var setTestData: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +51,7 @@ class createApp : Fragment() {
         }
     }
 
+    @OptIn(BetaOpenAI::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,11 +86,11 @@ class createApp : Fragment() {
 
 
             //传输changed回去
-            val bundle=Bundle()
+            val bundle = Bundle()
             //changed=1
-            bundle.putInt("changed",1)
-            val appCenterFragment=appCenter()
-            appCenterFragment.arguments=bundle
+            bundle.putInt("changed", 1)
+            val appCenterFragment = appCenter()
+            appCenterFragment.arguments = bundle
 
             val transaction = activity?.supportFragmentManager?.beginTransaction()
 
@@ -86,6 +99,78 @@ class createApp : Fragment() {
 
             transaction?.replace(R.id.fragment_main, appCenterFragment)?.commit()
 
+
+        }
+
+        //点击测试按钮，测试输入的内容
+        button_test = view?.findViewById(R.id.button_test)
+        textView_resultShow = view?.findViewById(R.id.textView_result)
+        setTestData = view?.findViewById(R.id.setTestData)
+        val setPrompt = view?.findViewById<TextView>(R.id.setPrompt)
+        val scrollView2 = view?.findViewById<ScrollView>(R.id.scrollView)
+        //设置textView_resultShow的最低高度
+        textView_resultShow?.getViewTreeObserver()?.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    textView_resultShow?.getViewTreeObserver()?.removeOnGlobalLayoutListener(this)
+                    val height = textView_resultShow?.getHeight()
+                    val minHeight = height?.plus(50)
+                    textView_resultShow?.setMinHeight(minHeight!!)
+                }
+            })
+
+
+        //监听textView_resultShow的高度变化，如果高度变化，就滚动到最底部
+        scrollView2?.getViewTreeObserver()?.addOnGlobalLayoutListener() {
+            scrollView2.fullScroll(View.FOCUS_DOWN);
+        }
+        var coroutineRunning = false
+        button_test?.setOnClickListener {
+
+            if (!coroutineRunning) {
+                button_test?.isEnabled = false
+                coroutineRunning = true
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    try {
+                        val prompt = setPrompt?.text.toString()
+                        val input = setTestData?.text.toString()
+                        coroutineRunning = true
+                        button_test?.isEnabled = false
+                        button_test?.text = "测试中..."
+                        textView_resultShow?.text = ""
+
+                        //启动滚动条
+                        textView_resultShow?.movementMethod =
+                            ScrollingMovementMethod.getInstance()
+
+                        chatGPT_flow(prompt, input).collect { chunk ->
+                            for (choice in chunk.choices) {
+                                val delta = choice.delta
+                                delta?.let {
+                                    val generatedText = it.content
+                                    if (!generatedText.isNullOrEmpty()) {
+                                        withContext(Dispatchers.Main) {
+
+                                            textView_resultShow?.append(generatedText + "")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            textView_resultShow?.text = "出现错误：${e.message}"
+                        }
+                    } finally {
+                        coroutineRunning = false
+                        button_test?.isEnabled = true
+                        button_test?.text = "测试"
+                    }
+                }
+
+
+            }
 
         }
 

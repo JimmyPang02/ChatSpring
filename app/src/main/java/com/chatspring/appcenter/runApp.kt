@@ -132,20 +132,6 @@ class runApp : Fragment() {
                 button_execute?.isEnabled = false
                 coroutineRunning = true
 
-                //修改execute按钮的文字
-                // button_execute?.text = "执行中"
-
-//                GlobalScope.launch(Dispatchers.Main) {
-//                    try {
-//                        val result = chatGPT(prompt, input)
-//                        textView_resultShow?.text = result
-//                    } finally {
-//                        coroutineRunning = false
-//                        button_execute?.isEnabled = true
-//                        button_execute?.text = "运行"
-//                    }
-//                }
-
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
                         coroutineRunning = true
