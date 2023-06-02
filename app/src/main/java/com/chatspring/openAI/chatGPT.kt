@@ -73,7 +73,14 @@ fun chatGPT_flow(prompt: String, input: String): Flow<ChatCompletionChunk> = flo
         )
     )
 
-    openAI.chatCompletions(chatCompletionRequest).collect { chunk ->
-        emit(chunk)
+    try {
+        openAI.chatCompletions(chatCompletionRequest).collect { chunk ->
+            emit(chunk)
+        }
+    } catch (e: Exception) {
+        // Here you can handle the exception, e.g., log it or notify user about the issue
+        println("Error occurred: ${e.message}")
+        // or rethrow the exception if you want to handle it on a higher level
+        // throw e
     }
 }
