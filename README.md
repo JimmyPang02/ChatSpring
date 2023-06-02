@@ -10,15 +10,11 @@
 
 文泉ChatSpring——让您的生活、学习与工作变得更加便捷、高效，开启全新的智慧之旅！🌟
 
+### 应用界面
 
-
-<p float="left">
-  <img src="README.assets/1.jpg" alt="1" width="33%" />
+<div align="center">
+  <p><strong>应用中心</strong></p>
+  <img src="README.assets/1.jpg" alt="1" width="33%" style="margin-right: 2%;" />
+  <p><strong>应用工坊</strong></p>
   <img src="README.assets/2.jpg" alt="2" width="33%" />
-    <img src="README.assets/3.jpg" alt="3" width="33%" />
-</p>
-
-
-
-
-
+</div>
