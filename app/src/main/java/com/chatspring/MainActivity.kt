@@ -54,11 +54,17 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_app_center -> {
-                    // 切换到 AppCenterFragment
-                    val navOptions = NavOptions.Builder()
-                        .setLaunchSingleTop(true)
-                        .build()
-                    navController.navigate(R.id.appCenterFragment, null, navOptions)
+                    // 判断是否已登录
+                    val sharedPreferences =
+                        this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+                    if (isLoggedIn) {
+                        // 切换到 AppCenterFragment
+                        val navOptions = NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .build()
+                        navController.navigate(R.id.appCenterFragment, null, navOptions)
+                    }
                     true
                 }
 
