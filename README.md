@@ -10,7 +10,7 @@
 
 文泉ChatSpring——让您的生活、学习与工作变得更加便捷、高效，开启全新的智慧之旅！🌟
 
-### 应用界面
+## 应用界面
 
 <div align="center">
   <p><strong>应用中心</strong></p>
