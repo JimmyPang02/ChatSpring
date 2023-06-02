@@ -30,6 +30,7 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="昵称"
+        android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
