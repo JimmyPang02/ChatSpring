@@ -25,7 +25,9 @@ class MainFragment : Fragment() {
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
 
                 //设置转场动画
-                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                // 取消转场动画，因为会导致fragment重叠
+//                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+
 
                 transaction?.replace(R.id.fragment_main, LoginFragment())?.commit()
             }
