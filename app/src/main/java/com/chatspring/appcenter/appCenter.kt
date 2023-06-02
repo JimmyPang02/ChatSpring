@@ -68,6 +68,10 @@ class appCenter : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
+
+        //初始化卡片使用的Bmob
+        Bmob.initialize(requireContext(), "032b1bb187d4fc1e9cad0ba73d98004f")
+
         val view = inflater.inflate(R.layout.fragment_app_center, container, false)
 
 
@@ -131,7 +135,6 @@ class appCenter : Fragment() {
             val password = sharedPreferences.getString("password", "")
             GlobaluserName = username.toString()
             val userlogin = BmobUser()
-            Bmob.initialize(requireContext(), "032b1bb187d4fc1e9cad0ba73d98004f")
             userlogin.username = username.toString()
             userlogin.setPassword(password.toString())
             userlogin.login(object : SaveListener<BmobUser>() {

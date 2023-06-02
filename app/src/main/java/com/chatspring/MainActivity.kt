@@ -11,9 +11,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cn.bmob.v3.Bmob
-import cn.bmob.v3.BmobUser
-import com.chatspring.appsetting.LoginState
-import com.chatspring.bmob_data.MyUser
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,13 +26,15 @@ class MainActivity : AppCompatActivity() {
         //更改顶部字体颜色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val decorView = window.decorView
-            decorView.systemUiVisibility = decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            decorView.systemUiVisibility =
+                decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
 
 
         // 初始化BMOB
-//        Bmob.initialize(this,"f4451fde9487c9f6c77dc7af136eca23")
-        Bmob.initialize(this,"032b1bb187d4fc1e9cad0ba73d98004f") //注释掉，别删掉
+        // Bmob.initialize(this,"f4451fde9487c9f6c77dc7af136eca23")
+        //Bmob.initialize(this,"032b1bb187d4fc1e9cad0ba73d98004f") //注释掉，别删掉
+        Bmob.initialize(this, "032b1bb187d4fc1e9cad0ba73d98004f")
 
         //隐藏顶部标题栏
         supportActionBar?.hide()
@@ -44,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view)
 
         // 获取 NavController
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         navController = navHostFragment.navController
     }
 
@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.appCenterFragment, null, navOptions)
                     true
                 }
+
                 R.id.menu_app_workshop -> {
                     // 切换到 AppWorkshopFragment
                     val navOptions = NavOptions.Builder()
@@ -70,8 +71,10 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.appWorkshopFragment, null, navOptions)
                     true
                 }
+
                 R.id.settings -> {
-                    val sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                    val sharedPreferences =
+                        this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
                     val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
                     if (!isLoggedIn) {
@@ -80,8 +83,7 @@ class MainActivity : AppCompatActivity() {
                             .setLaunchSingleTop(true)
                             .build()
                         navController.navigate(R.id.AppSetting_notlogin, null, navOptions)
-                    }
-                    else if(isLoggedIn){
+                    } else if (isLoggedIn) {
                         // 切换到 AppSetting (已登录)
                         val navOptions = NavOptions.Builder()
                             .setLaunchSingleTop(true)
