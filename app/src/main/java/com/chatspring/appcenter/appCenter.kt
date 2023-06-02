@@ -70,7 +70,7 @@ class appCenter : Fragment() {
     ): View? {
 
         //初始化卡片使用的Bmob
-        Bmob.initialize(requireContext(), "032b1bb187d4fc1e9cad0ba73d98004f")
+        Bmob.initialize(requireContext(), BmobAppKey)
 
         val view = inflater.inflate(R.layout.fragment_app_center, container, false)
 
