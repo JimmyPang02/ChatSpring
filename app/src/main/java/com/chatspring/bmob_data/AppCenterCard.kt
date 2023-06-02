@@ -46,18 +46,18 @@ class AppCenterCard : BmobObject() {
                     //mObjectId?.let { bmob_mObjectId_list.add(it) }
                     //存入bmob_model_list
                     //bmob_model_list.add(card)
-                    Toast.makeText(
-                        getApplicationContext(),
-                        "卡片已成功上传至云端",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        getApplicationContext(),
+//                        "卡片已成功上传至云端",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 } else {
                     println("创建数据失败：" + e.message)
-                    Toast.makeText(
-                        getApplicationContext(),
-                        "卡片上传至云端失败",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        getApplicationContext(),
+//                        "卡片上传至云端失败",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
             }
         })
@@ -195,5 +195,5 @@ class AppCenterCard : BmobObject() {
                 }
             }
         })
-}
+    }
 }
