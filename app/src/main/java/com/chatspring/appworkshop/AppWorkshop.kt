@@ -54,13 +54,24 @@ class AppWorkshop : Fragment(), CardAdapter.OnItemClickListener {
                             val appintro = APP.appintro
                             val appprompt = APP.appprompt
                             var iconname = APP.icon
+                            var resourceId: Int = 0
+                            // 如果没有设置图标，则使用默认的"chat"图标
                             if (iconname == null){
                                 iconname = "chat"
+
                             }
-                            val resourceId =
-                                context?.resources?.getIdentifier(iconname, "drawable", "com.chatspring")
+                            // 如果设置了图标，则尝试获取资源ID
+                            else{
+                                resourceId = resources.getIdentifier(iconname, "drawable", activity?.packageName)
+                                // 如果找不到则使用默认的"chat"资源ID
+                                if (resourceId == 0){
+                                    var temp =  resources.getIdentifier("chat", "drawable", activity?.packageName)
+                                    resourceId = temp
+                                }
+                            }
+
                             if(appname !=null&&appintro !=null&&appprompt !=null){
-                                cardDataList.add(CardData(resourceId!!, appname,appintro,appprompt))
+                                cardDataList.add(CardData(resourceId, appname,appintro,appprompt))
                             }
                         }
                         // 通知适配器数据已更改
