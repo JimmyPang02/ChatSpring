@@ -1,7 +1,6 @@
 package com.chatspring.bmob_data
 
 import android.widget.Toast
-import cn.bmob.v3.Bmob
 import cn.bmob.v3.Bmob.getApplicationContext
 import cn.bmob.v3.BmobObject
 import cn.bmob.v3.BmobQuery
