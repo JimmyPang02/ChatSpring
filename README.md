@@ -18,3 +18,19 @@
   <p><strong>应用工坊</strong></p>
   <img src="README.assets/2.jpg" alt="2" width="33%" />
 </div>
+
+
+## 联系我们
+如果您有任何问题、建议，欢迎通过以下方式联系我们：
+- 在我们的 GitHub Repo 上提交 Issue 或 PR
+- 发送邮件至 panggoat5@gmail.com
+- 微信联系：Hustle-lesdimbeyond
+
+
+## 贡献者
+
+[Contributors](https://github.com/Goat11/ChatSpring/graphs/contributors)
+
+## 证书
+
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
