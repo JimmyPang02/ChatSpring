@@ -8,11 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import cn.bmob.v3.BmobQuery
-import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import com.chatspring.R
@@ -124,7 +122,7 @@ class InformationFragment : Fragment() {
         exitButton.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(requireContext())
             // 设置自定义布局
-            val customLayout = layoutInflater.inflate(R.layout.promptbox, null)
+            val customLayout = layoutInflater.inflate(R.layout.exitbox, null)
             alertDialogBuilder.setView(customLayout)
             // 在自定义布局中找到按钮并设置点击事件
             val positiveButton = customLayout.findViewById<Button>(R.id.positive_button)
