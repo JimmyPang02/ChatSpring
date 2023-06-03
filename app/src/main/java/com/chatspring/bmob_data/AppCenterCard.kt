@@ -84,6 +84,7 @@ class AppCenterCard : BmobObject() {
 
     fun get_all_cards() {
         var bmobQuery: BmobQuery<AppCenterCard> = BmobQuery()
+        bmobQuery.addWhereEqualTo("userName", GlobaluserName)
         bmobQuery.findObjects(object : FindListener<AppCenterCard>() {
             override fun done(cards: MutableList<AppCenterCard>?, ex: BmobException?) {
 
