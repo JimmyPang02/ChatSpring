@@ -84,3 +84,33 @@ fun chatGPT_flow(prompt: String, input: String): Flow<ChatCompletionChunk> = flo
         // throw e
     }
 }
+
+
+@OptIn(BetaOpenAI::class)
+fun chatGPT_4_flow(prompt: String, input: String): Flow<ChatCompletionChunk> = flow {
+    val apiKey = GlobalapiKey
+    val openAIhost = OpenAIHost("https://service-i501wcby-1318284291.jp.apigw.tencentcs.com")
+    val openAIconfig = OpenAIConfig(token = apiKey, host = openAIhost)
+    val openAI = OpenAI(openAIconfig)
+
+    val chatCompletionRequest = ChatCompletionRequest(
+        model = ModelId("gpt-4"),
+        messages = listOf(
+            ChatMessage(
+                role = ChatRole.User,
+                content = prompt + input
+            )
+        )
+    )
+
+    try {
+        openAI.chatCompletions(chatCompletionRequest).collect { chunk ->
+            emit(chunk)
+        }
+    } catch (e: Exception) {
+        // Here you can handle the exception, e.g., log it or notify user about the issue
+        println("Error occurred: ${e.message}")
+        // or rethrow the exception if you want to handle it on a higher level
+        // throw e
+    }
+}
