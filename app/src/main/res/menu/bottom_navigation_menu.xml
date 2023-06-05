@@ -1,15 +1,19 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_app_center"
-        android:title="App Center"
+        android:title="Center"
+        app:itemTextColor="@color/black"
         android:icon="@drawable/chatspring" />
     <item
         android:id="@+id/menu_app_workshop"
-        android:title="App Workshop"
+        android:title="Workshop"
+        app:itemTextColor="@color/black"
         android:icon="@drawable/workshop" />
     <item
         android:id="@+id/settings"
-        android:title="设置"
+        android:title="Settings"
+        app:itemTextColor="@color/black"
         android:icon="@drawable/setting"
         />
 </menu>
