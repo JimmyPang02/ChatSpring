@@ -1,11 +1,18 @@
 package com.chatspring
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.Window
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -45,6 +52,10 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         navController = navHostFragment.navController
+
+        // 更改导航栏的默认选中项
+        navView.selectedItemId = R.id.settings
+
     }
 
     override fun onStart() {
@@ -52,15 +63,10 @@ class MainActivity : AppCompatActivity() {
 
         // 设置导航栏的点击事件
         navView.setOnNavigationItemSelectedListener { item ->
+
+            // 点击事件
             when (item.itemId) {
                 R.id.menu_app_center -> {
-//                    // 判断是否已登录
-//                    val sharedPreferences =
-//                        this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-//                    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
-//                    if (isLoggedIn) {
-//
-//                    }
                     // 切换到 AppCenterFragment
                     val navOptions = NavOptions.Builder()
                         .setLaunchSingleTop(true)
@@ -79,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.settings -> {
+                    // 获取登录状态
                     val sharedPreferences =
                         this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
                     val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
@@ -99,6 +106,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+
+                // 返回 true 表示已处理选择事件
                 else -> false
             }
         }

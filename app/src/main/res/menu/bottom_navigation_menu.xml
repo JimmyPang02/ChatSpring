@@ -2,17 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_app_center"
-        android:title="Center"
+        android:title="应用中心"
         app:itemTextColor="@color/black"
         android:icon="@drawable/chatspring" />
     <item
         android:id="@+id/menu_app_workshop"
-        android:title="Workshop"
+        android:title="创意工坊"
         app:itemTextColor="@color/black"
         android:icon="@drawable/workshop" />
     <item
         android:id="@+id/settings"
-        android:title="Settings"
+        android:title="设置"
         app:itemTextColor="@color/black"
         android:icon="@drawable/setting"
         />

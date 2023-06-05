@@ -12,6 +12,7 @@
     <color name="green">#00FF00</color>
     <color name="light_gray">#F5F5F5</color>
     <color name="dark_blue">#1E90FF</color>
+    <color name="qian_blue">#1EA0FF</color>
     <color name="white_trans">#80FFFFFF</color> <!-- 50% transparency -->
     <color name="ivory">#fffff0</color><!--象牙色 -->
     5 <color name="lightyellow">#ffffe0</color><!--亮黄色 -->
