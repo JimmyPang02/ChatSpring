@@ -25,6 +25,7 @@ import com.chatspring.Model.AppModel
 import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Timer
 import kotlin.concurrent.schedule
 
@@ -122,11 +123,16 @@ class appCenter : Fragment() {
 
         // 判断用户是否登陆
         if (!isLoggedIn) {
+            // 设置底部导航栏的选中项为设置（但没有效果！！！）
+            val bottomNavigationView =
+                activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.selectedItemId = R.id.settings
             // 如果用户没有登陆，跳转到登陆界面,并且弹出消息框
             Toast.makeText(requireContext(), "请先登陆", Toast.LENGTH_SHORT).show()
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
             transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
+
         } else {
 
             LoginState.isLoggedIn = true

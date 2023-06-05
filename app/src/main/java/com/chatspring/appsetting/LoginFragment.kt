@@ -17,7 +17,6 @@ import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.SaveListener
 import com.chatspring.R
-import com.chatspring.bmob_data.AppCenterCard
 import com.chatspring.bmob_data.MyUser
 
 class LoginFragment : Fragment() {

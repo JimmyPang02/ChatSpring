@@ -12,6 +12,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -48,18 +49,14 @@ class MainActivity : AppCompatActivity() {
         // 导航栏
         navView = findViewById(R.id.nav_view)
 
-        // 获取 NavController
+        // 获取 NavController(可以理解为导航栏的body)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         navController = navHostFragment.navController
 
         // 更改导航栏的默认选中项
-        navView.selectedItemId = R.id.settings
+        navView.selectedItemId = R.id.fragment_main
 
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         // 设置导航栏的点击事件
         navView.setOnNavigationItemSelectedListener { item ->
@@ -67,21 +64,54 @@ class MainActivity : AppCompatActivity() {
             // 点击事件
             when (item.itemId) {
                 R.id.menu_app_center -> {
-                    // 切换到 AppCenterFragment
-                    val navOptions = NavOptions.Builder()
-                        .setLaunchSingleTop(true)
-                        .build()
-                    navController.navigate(R.id.appCenterFragment, null, navOptions)
-                    true
+                    // 获取登录状态
+                    val sharedPreferences =
+                        this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+                    // 判断是否登录
+                    if (!isLoggedIn) {
+                        // toast提示
+                        Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show()
+                        // 切换到 AppSetting （未登录）
+                        val navOptions = NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .build()
+                        navController.navigate(R.id.AppSetting_notlogin, null, navOptions)
+                        false // 返回 false 用于取消选择事件，使得导航栏的选中值不会被切换
+                    } else {
+                        // 切换到 AppCenterFragment
+                        val navOptions = NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .build()
+                        navController.navigate(R.id.appCenterFragment, null, navOptions)
+                        true
+                    }
                 }
 
                 R.id.menu_app_workshop -> {
-                    // 切换到 AppWorkshopFragment
-                    val navOptions = NavOptions.Builder()
-                        .setLaunchSingleTop(true)
-                        .build()
-                    navController.navigate(R.id.appWorkshopFragment, null, navOptions)
-                    true
+                    // 获取登录状态
+                    val sharedPreferences =
+                        this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+                    if (!isLoggedIn) {
+                        // toast提示
+                        Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show()
+                        // 切换到 AppSetting （未登录）
+                        val navOptions = NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .build()
+                        navController.navigate(R.id.AppSetting_notlogin, null, navOptions)
+                        false // 返回 false 用于取消选择事件，使得导航栏的选中值不会被切换
+                    }
+                    else {
+                        // 切换到 AppWorkshopFragment
+                        val navOptions = NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .build()
+                        navController.navigate(R.id.appWorkshopFragment, null, navOptions)
+                        true
+                    }
                 }
 
                 R.id.settings -> {
@@ -111,5 +141,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 }
