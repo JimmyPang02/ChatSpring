@@ -54,8 +54,20 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         navController = navHostFragment.navController
 
-        // 更改导航栏的默认选中项
-        navView.selectedItemId = R.id.fragment_main
+        // 根据用户登录状态初始界面
+        val sharedPreferences =
+            this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (!isLoggedIn) {
+            // 如果未登录，导航至 AppSetting
+            navController.navigate(R.id.AppSetting_notlogin)
+            navView.selectedItemId = R.id.settings
+        } else {
+            // 如果已登录，导航至 appCenterFragment
+            navController.navigate(R.id.appCenterFragment)
+            navView.selectedItemId = R.id.menu_app_center
+        }
 
 
         // 设置导航栏的点击事件
