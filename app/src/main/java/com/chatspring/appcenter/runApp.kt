@@ -3,7 +3,12 @@ package com.chatspring
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
@@ -16,6 +21,7 @@ import android.widget.Button
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.aallam.openai.api.BetaOpenAI
 import com.chatspring.openAI.chatGPT
 import com.chatspring.openAI.chatGPT_flow
@@ -23,6 +29,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -197,8 +205,50 @@ class runApp : Fragment() {
             }
         }
 
-        val button_share=view?.findViewById<Button>(R.id.button_share)
-        //点击分享按钮，以截屏形式分享
+        val button_share = view?.findViewById<Button>(R.id.button_share)
+        button_share?.setOnClickListener {
+            // 创建shareimg.xml的布局
+            val shareView = LayoutInflater.from(context).inflate(R.layout.shareimg, null)
+            val shareView_textview_appname = shareView.findViewById<TextView>(R.id.textview_appname)
+            val shareView_textview_appdescription = shareView.findViewById<TextView>(R.id.textview_appdescription)
+            val shareView_textview_myinput = shareView.findViewById<TextView>(R.id.textview_myinput)
+            val shareView_textview_response = shareView.findViewById<TextView>(R.id.textview_response)
+
+            // 设置shareView的内容
+            shareView_textview_appname.text = appName
+            shareView_textview_appdescription.text = appDescription
+            shareView_textview_myinput.text = textView_Input?.text.toString()
+            shareView_textview_response.text = textView_resultShow?.text.toString()
+
+            // 将shareView转换为bitmap
+            shareView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
+            shareView.layout(0, 0, shareView.measuredWidth, shareView.measuredHeight)
+
+            val bitmap = Bitmap.createBitmap(shareView.measuredWidth, shareView.measuredHeight,
+                Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            shareView.draw(canvas)
+
+            // 把bitmap转换为png并分享到外部
+            val file = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "shareimg.png")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            val fileUri = FileProvider.getUriForFile(context!!, "${BuildConfig.APPLICATION_ID}.provider", file)
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, fileUri)
+                type = "image/png"
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share image via:"))
+        }
+
+
+
 
 
         return view

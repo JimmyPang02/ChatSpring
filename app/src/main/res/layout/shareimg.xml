@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/textview_response"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="response"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/intro"
+        app:layout_constraintStart_toStartOf="@+id/intro"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="我的输入"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_appdescription"
+        app:layout_constraintStart_toStartOf="@+id/textview_appdescription"
+        app:layout_constraintTop_toBottomOf="@+id/textview_appdescription" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="卡片功能"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_appname"
+        app:layout_constraintStart_toStartOf="@+id/textview_appname"
+        app:layout_constraintTop_toBottomOf="@+id/textview_appname" />
+
+    <TextView
+        android:id="@+id/textview_appname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="appname"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/intro"
+        app:layout_constraintStart_toStartOf="@+id/intro"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="GPT应答"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_myinput"
+        app:layout_constraintStart_toStartOf="@+id/textview_myinput"
+        app:layout_constraintTop_toBottomOf="@+id/textview_myinput" />
+
+    <TextView
+        android:id="@+id/textview_appdescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="appdescription"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/intro"
+        app:layout_constraintStart_toStartOf="@+id/intro"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textview_myinput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="myinput"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/intro"
+        app:layout_constraintStart_toStartOf="@+id/intro"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="&quot;文泉&quot;ChatSpring-超好用的AI工具箱"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="卡片名称"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/intro"
+        app:layout_constraintStart_toStartOf="@+id/intro"
+        app:layout_constraintTop_toBottomOf="@+id/intro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
