@@ -221,12 +221,17 @@ class runApp : Fragment() {
             shareView_textview_response.text = textView_resultShow?.text.toString()
 
             // 将shareView转换为bitmap
-            shareView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-            shareView.layout(0, 0, shareView.measuredWidth, shareView.measuredHeight)
+            val displayMetrics = context?.resources?.displayMetrics
+            val width = displayMetrics?.widthPixels ?: 0
+            val height = 2 * width
 
-            val bitmap = Bitmap.createBitmap(shareView.measuredWidth, shareView.measuredHeight,
-                Bitmap.Config.ARGB_8888)
+            shareView.measure(
+                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+            )
+            shareView.layout(0, 0, width, height)
+
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
             shareView.draw(canvas)
 
