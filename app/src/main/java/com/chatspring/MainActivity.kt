@@ -1,24 +1,19 @@
 package com.chatspring
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.PorterDuff
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import cn.bmob.v3.Bmob
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 const val BmobAppKey = "032b1bb187d4fc1e9cad0ba73d98004f"
 //const val BmobAppKey = "f4451fde9487c9f6c77dc7af136eca23"
@@ -46,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         //隐藏顶部标题栏
         supportActionBar?.hide()
 
-        // 导航栏
+        // 获取导航栏
         navView = findViewById(R.id.nav_view)
 
         // 获取 NavController(可以理解为导航栏的body)

@@ -48,11 +48,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_about"
         android:layout_width="151dp"
         android:layout_height="57dp"
         android:gravity="center"
-        android:text="当前版本 2.0.0"
+        android:text="@string/current_version"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="@+id/image_view"
@@ -77,6 +77,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_about" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
