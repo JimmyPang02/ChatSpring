@@ -5,4 +5,6 @@
     <string name="AboutUs">
         文泉ChatSpring，一款基于GPT的AI工具箱！🚀\n\n文泉Chatspring致力于协助您轻松打造专属的AI应用，通过预制的prompt实现一键式体验，将创意源源不断地转化为现实。✨\n只需输入OpenAI的API KEY，便可尽享文泉Chatspring带来的智能便利。我们持续为您提供更优质、更高效的体验，让您免去额外费用。🎉\n在我们丰富多样的应用工坊中，您可畅游于用户分享的各类应用，激发您的创意灵感。💡\n文泉ChatSpring——让您的生活、学习与工作变得更加便捷、高效，开启全新的智慧之旅！🌟\n\n本应用由以下成员开发:\n\n彭孜勉：\n负责项目管理，产品原型、UI与功能设计，App WorkShop开发 👨‍💻\n\n李泽涛：\n负责App Center与交互卡片的开发。同时负责GPT系统的国内加速服务、以及GPT系统与用户卡片的对接响应 👨‍💻\n\n李炜：\n负责用户系统和APP Setting的开发 👨‍💻\n
     </string>
+    <string name="current_version">当前版本 %1$s</string>
+    <string name="app_version">2.1</string>
 </resources>
