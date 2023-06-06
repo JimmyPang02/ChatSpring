@@ -121,9 +121,9 @@ class appCenter : Fragment() {
             requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
-        // 判断用户是否登陆
+        // 判断用户是否登陆 （这个地方理论上已经没用了，进入appcenter的时候会保证一定是登陆态）
         if (!isLoggedIn) {
-            // 设置底部导航栏的选中项为设置（但没有效果！！！）
+            // 设置底部导航栏的选中项为设置
             val bottomNavigationView =
                 activity?.findViewById<BottomNavigationView>(R.id.nav_view)
             bottomNavigationView?.selectedItemId = R.id.settings
