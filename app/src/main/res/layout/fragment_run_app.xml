@@ -26,7 +26,7 @@
             <ScrollView
                 android:id="@+id/scrollview_input"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
@@ -156,6 +156,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_share"
+                android:layout_width="88dp"
+                android:layout_height="35dp"
+                android:text="分享"
+                android:background="@drawable/bg_rounded_gray"
+                app:layout_constraintBottom_toBottomOf="@+id/button_copy_result"
+                app:layout_constraintStart_toStartOf="@+id/scrollView2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -197,6 +197,10 @@ class runApp : Fragment() {
             }
         }
 
+        val button_share=view?.findViewById<Button>(R.id.button_share)
+        //点击分享按钮，以截屏形式分享
+
+
         return view
     }
 
