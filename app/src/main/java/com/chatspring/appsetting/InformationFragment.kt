@@ -2,12 +2,16 @@ package com.chatspring.appsetting
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import cn.bmob.v3.BmobQuery
@@ -15,6 +19,7 @@ import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import com.chatspring.R
 import com.chatspring.bmob_data.MyUser
+import com.chatspring.bmob_data.Version
 
 class InformationFragment : Fragment() {
 
@@ -28,6 +33,62 @@ class InformationFragment : Fragment() {
         editor.putString("username", username)
         editor.putString("password", password)
         editor.apply()
+    }
+
+    //检查更新并显示相应的对话框内容
+    private fun checkUpdates(context: Context) {
+        val query = BmobQuery<Version>()
+        query.findObjects(object : FindListener<Version>() {
+            override fun done(versions: MutableList<Version>?, e: BmobException?) {
+                if (e == null) {
+                    if (versions != null && versions.isNotEmpty()) {
+                        val latestVersion = versions[0]
+                        val appVersion = context.getString(R.string.app_version)
+
+                        if (latestVersion.version == appVersion) {
+                            // 已经是最新版本
+                            Toast.makeText(requireContext(), "已经是最新版本!", Toast.LENGTH_SHORT).show()
+                            //showUpdateDialog(context, "已经是最新版本")
+                        } else {
+                            // 有新版本可更新
+                            val content = latestVersion.content
+                            showUpdateDialog(context, content)
+                        }
+                    }
+                } else {
+                    Log.e(ContentValues.TAG, "Bmob query error: ${e.message}")
+                }
+            }
+        })
+    }
+
+    //创建一个函数来显示更新对话框
+    private fun showUpdateDialog(context: Context, content: String) {
+        val dialogBuilder = AlertDialog.Builder(context)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.update_dialog, null)
+        dialogBuilder.setView(dialogView)
+
+        val titleTextView = dialogView.findViewById<TextView>(R.id.dialog_title)
+        val contentTextView = dialogView.findViewById<TextView>(R.id.dialog_content)
+        val cancelButton = dialogView.findViewById<Button>(R.id.negative_button)
+        val confirmButton = dialogView.findViewById<Button>(R.id.positive_button)
+
+        titleTextView.text = "有新版本可更新！"
+        contentTextView.text = content
+
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
+
+        cancelButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        confirmButton.setOnClickListener {
+            alertDialog.dismiss()
+            // 跳转到指定链接
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chatspring.goatpeng.cn/downloads/chatspring.apk/"))
+            context.startActivity(intent)
+        }
     }
 
     override fun onCreateView(
@@ -72,12 +133,6 @@ class InformationFragment : Fragment() {
                 transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 transaction?.replace(R.id.fragment_main, ChangIDFragment())?.commit()
 
-                // 跳转到一个修改id的界面
-                //先添加
-//                add(R.id.fragment_main, ChangIDFragment())
-//                replace(R.id.fragment_main, ChangIDFragment())
-//                addToBackStack(null)
-//                commit()
             }
         }
 
@@ -99,24 +154,6 @@ class InformationFragment : Fragment() {
             }
         }
 
-//        //退出登录按钮
-//        val exitButton: Button = newView.findViewById(R.id.exit_button)
-//        exitButton.setOnClickListener {
-//            fragmentManager?.beginTransaction()?.apply {
-//                //登录状态改为false
-//                LoginState.isLoggedIn = false
-//
-//                val transaction = fragmentManager?.beginTransaction()
-//
-//                //设置转场动画
-//                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-//
-//                transaction?.replace(R.id.fragment_main, MainFragment())?.commit()
-////                replace(R.id.fragment_main, MainFragment())
-////                // 后续可能要增加销毁所有fragment
-////                commit()
-//            }
-//        }
         //退出登录按钮
         val exitButton: Button = newView.findViewById(R.id.exit_button)
         exitButton.setOnClickListener {
@@ -155,19 +192,7 @@ class InformationFragment : Fragment() {
             alertDialog.show()
         }
 
-
-//            alertDialogBuilder.setPositiveButton("确定") { dialog, which ->
-//                fragmentManager?.beginTransaction()?.apply {
-//
-//                }
-//            }
-//            alertDialogBuilder.setNegativeButton("取消") { dialog, which ->
-//                // Do nothing
-//            }
-//            alertDialogBuilder.show()
-//        }
-
-
+        //返回按钮
         val back_button: Button = newView.findViewById(R.id.back_button)
         back_button.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
@@ -176,12 +201,19 @@ class InformationFragment : Fragment() {
             transaction?.replace(R.id.fragment_main, MainAfterFragment())?.commit()
         }
 
+        //关于我们按钮
         val aboutus_button: Button = newView.findViewById(R.id.about_button)
         aboutus_button.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             //设置转场动画
             transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
             transaction?.replace(R.id.fragment_main, SettingFragment())?.commit()
+        }
+
+        //检查更新按钮
+        val checkupdates_button: Button = newView.findViewById(R.id.checkgengxin)
+        checkupdates_button.setOnClickListener {
+            checkUpdates(requireContext())
         }
 
         return newView
