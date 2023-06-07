@@ -35,9 +35,9 @@
         android:id="@+id/apikey_edit_text"
         android:layout_width="298dp"
         android:layout_height="69dp"
-        android:layout_marginTop="150dp"
-        android:inputType="text"
+        android:layout_marginTop="280dp"
         android:backgroundTint="@color/black"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,5 +76,46 @@
         app:layout_constraintStart_toStartOf="@+id/apikey_edit_text"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="298dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/round_border"
+        android:entries="@array/gpt_versions"
+        android:prompt="@string/default_gpt_version"
+        app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/apikey_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/apikey_edit_text" />
 
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="100dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="100dp"
+        android:gravity="center"
+        android:text="Model"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner" />
+
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="49dp"
+        android:layout_height="42dp"
+        android:src="@drawable/gptversion"
+        app:layout_constraintBottom_toBottomOf="@+id/version"
+        app:layout_constraintEnd_toStartOf="@+id/version"
+        app:layout_constraintTop_toTopOf="@+id/version" />
+
+    <ImageView
+        android:id="@+id/image_view3"
+        android:layout_width="49dp"
+        android:layout_height="42dp"
+        android:src="@drawable/xiala"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

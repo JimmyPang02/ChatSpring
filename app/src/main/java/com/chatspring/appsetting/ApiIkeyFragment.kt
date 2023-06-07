@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.chatspring.R
 
 class ApiIkeyFragment : Fragment() {
@@ -38,6 +41,23 @@ class ApiIkeyFragment : Fragment() {
             apikeyEditText.setText(storedApiKey)
         }
 
+        // 找到 Spinner 视图
+        val spinner: Spinner = view.findViewById(R.id.spinner)
+
+        // 从 SharedPreferences 中获取已存储的选项值
+        val storedSelectedValue = sharedPreferences.getString("gpt_version", "")
+
+        // 如果已存储的选项值不为空，则设置 Spinner 的选中项
+        if (storedSelectedValue != null) {
+            val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.gpt_versions, android.R.layout.simple_spinner_item)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+
+            val position = adapter.getPosition(storedSelectedValue)
+            spinner.setSelection(position)
+        }
+
+
         // 获取保存按钮并添加点击事件
         val saveButton: Button = view.findViewById(R.id.save_button)
         saveButton.setOnClickListener {
@@ -45,10 +65,15 @@ class ApiIkeyFragment : Fragment() {
             //val apiUrl = apiurlEditText.text.toString()
             val apiKey = apikeyEditText.text.toString()
 
+            // 获取Spinner选中的内容
+            val spinner: Spinner = view.findViewById(R.id.spinner)
+            val selectvalue = spinner.selectedItem.toString()
+
             // 使用 SharedPreferences 存储输入框的值
             val editor = sharedPreferences.edit()
             //editor.putString("apiUrl", apiUrl)
             editor.putString("apiKey", apiKey)
+            editor.putString("gpt_version", selectvalue)
             editor.apply()
 
             // 根据登录状态导航到 MainAfterFragment 或 MainFragment
