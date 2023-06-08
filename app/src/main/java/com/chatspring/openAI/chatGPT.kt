@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.*
+import com.aallam.openai.api.model.Model
 import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
@@ -57,33 +58,46 @@ suspend fun chatGPT(prompt: String, input: String): String {
 }
 
 @OptIn(BetaOpenAI::class)
-fun chatGPT_flow(prompt: String, input: String): Flow<ChatCompletionChunk> = flow {
-    val apiKey = GlobalapiKey
-    val openAIhost = OpenAIHost("https://service-i501wcby-1318284291.jp.apigw.tencentcs.com")
-    val openAIconfig = OpenAIConfig(token = apiKey, host = openAIhost)
-    val openAI = OpenAI(openAIconfig)
+fun chatGPT_flow(prompt: String, input: String, gpt_version: String): Flow<ChatCompletionChunk> =
+    flow {
+        val apiKey = GlobalapiKey
+        val openAIhost = OpenAIHost("https://service-i501wcby-1318284291.jp.apigw.tencentcs.com")
+        val openAIconfig = OpenAIConfig(token = apiKey, host = openAIhost)
+        val openAI = OpenAI(openAIconfig)
+        var model_type: String
 
-    val chatCompletionRequest = ChatCompletionRequest(
-        model = ModelId("gpt-3.5-turbo"),
-        messages = listOf(
-            ChatMessage(
-                role = ChatRole.User,
-                content = prompt + input
+        val models: List<Model> = openAI.models()
+
+        if (gpt_version == "GPT-3.5") {
+            model_type = "gpt-3.5-turbo"
+        } else if (gpt_version == "GPT-4") {
+            model_type = "gpt-3.5-turbo"
+        } else {
+            model_type = "gpt-3.5-turbo"
+        }
+
+
+        val chatCompletionRequest = ChatCompletionRequest(
+            model = ModelId(model_type),
+            messages = listOf(
+                ChatMessage(
+                    role = ChatRole.User,
+                    content = prompt + input
+                )
             )
         )
-    )
 
-    try {
-        openAI.chatCompletions(chatCompletionRequest).collect { chunk ->
-            emit(chunk)
+        try {
+            openAI.chatCompletions(chatCompletionRequest).collect { chunk ->
+                emit(chunk)
+            }
+        } catch (e: Exception) {
+            // Here you can handle the exception, e.g., log it or notify user about the issue
+            println("Error occurred: ${e.message}")
+            // or rethrow the exception if you want to handle it on a higher level
+            // throw e
         }
-    } catch (e: Exception) {
-        // Here you can handle the exception, e.g., log it or notify user about the issue
-        println("Error occurred: ${e.message}")
-        // or rethrow the exception if you want to handle it on a higher level
-        // throw e
     }
-}
 
 
 @OptIn(BetaOpenAI::class)
