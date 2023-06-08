@@ -75,10 +75,20 @@ class appCenter : Fragment() {
         override fun onReceive(context: Context, intent: Intent) {
             val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
             if (isGetAllCards) {
-                root_layout?.removeAllViews()
-                // 更新卡片
-                loadAppCard()
-
+                //等待0.5秒
+                val timer = Timer()
+                timer.schedule(object : TimerTask() {
+                    override fun run() {
+                        // 需要一个Activity的实例，如果在Fragment中可以用getActivity()
+                        val activity: Activity? = activity
+                        activity?.runOnUiThread {
+                            // 更新UI
+                            root_layout?.removeAllViews()
+                            // 更新卡片
+                            loadAppCard()
+                        }
+                    }
+                }, 100)
             }
         }
     }
@@ -153,7 +163,7 @@ class appCenter : Fragment() {
                                 rotation.cancel()
                             }
                         }
-                    }, 500)
+                    }, 800)
                 }
             }
         }
