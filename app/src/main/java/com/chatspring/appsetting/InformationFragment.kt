@@ -65,34 +65,6 @@ class InformationFragment : Fragment() {
     }
 
     //创建一个函数来显示更新对话框
-//    private fun showUpdateDialog(context: Context, content: String) {
-//        val dialogBuilder = AlertDialog.Builder(context)
-//        val dialogView = LayoutInflater.from(context).inflate(R.layout.update_dialog, null)
-//        dialogBuilder.setView(dialogView)
-//
-//        val titleTextView = dialogView.findViewById<TextView>(R.id.dialog_title)
-//        val contentTextView = dialogView.findViewById<TextView>(R.id.dialog_content)
-//        val cancelButton = dialogView.findViewById<Button>(R.id.negative_button)
-//        val confirmButton = dialogView.findViewById<Button>(R.id.positive_button)
-//
-//        titleTextView.text = "有新版本可更新！"
-//        contentTextView.text = content
-//
-//        val alertDialog = dialogBuilder.create()
-//        alertDialog.show()
-//
-//        cancelButton.setOnClickListener {
-//            alertDialog.dismiss()
-//        }
-//
-//        confirmButton.setOnClickListener {
-//            alertDialog.dismiss()
-//            // 跳转到指定链接
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chatspring.goatpeng.cn/downloads/chatspring.apk/"))
-//            context.startActivity(intent)
-//        }
-//    }
-
     private fun showUpdateDialog(context: Context, content: String) {
         val dialogBuilder = AlertDialog.Builder(context)
         val dialogView = LayoutInflater.from(context).inflate(R.layout.update_dialog, null)
@@ -115,17 +87,45 @@ class InformationFragment : Fragment() {
 
         confirmButton.setOnClickListener {
             alertDialog.dismiss()
-            // 使用 DownloadManager 下载文件
-            val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            val uri = Uri.parse("https://chatspring.goatpeng.cn/downloads/chatspring.apk")
-            val request = DownloadManager.Request(uri)
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            request.setTitle("下载更新")
-            request.setDescription("正在下载应用更新...")
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "chatspring.apk")
-            downloadManager.enqueue(request)
+            // 跳转到指定链接
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chatspring.goatpeng.cn/downloads/chatspring.apk/"))
+            context.startActivity(intent)
         }
     }
+
+//    private fun showUpdateDialog(context: Context, content: String) {
+//        val dialogBuilder = AlertDialog.Builder(context)
+//        val dialogView = LayoutInflater.from(context).inflate(R.layout.update_dialog, null)
+//        dialogBuilder.setView(dialogView)
+//
+//        val titleTextView = dialogView.findViewById<TextView>(R.id.dialog_title)
+//        val contentTextView = dialogView.findViewById<TextView>(R.id.dialog_content)
+//        val cancelButton = dialogView.findViewById<Button>(R.id.negative_button)
+//        val confirmButton = dialogView.findViewById<Button>(R.id.positive_button)
+//
+//        titleTextView.text = "有新版本可更新！"
+//        contentTextView.text = content
+//
+//        val alertDialog = dialogBuilder.create()
+//        alertDialog.show()
+//
+//        cancelButton.setOnClickListener {
+//            alertDialog.dismiss()
+//        }
+//
+//        confirmButton.setOnClickListener {
+//            alertDialog.dismiss()
+//            // 使用 DownloadManager 下载文件
+//            val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+//            val uri = Uri.parse("https://chatspring.goatpeng.cn/downloads/chatspring.apk")
+//            val request = DownloadManager.Request(uri)
+//            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+//            request.setTitle("下载更新")
+//            request.setDescription("正在下载应用更新...")
+//            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "chatspring.apk")
+//            downloadManager.enqueue(request)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
