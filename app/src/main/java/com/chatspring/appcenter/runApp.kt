@@ -177,7 +177,8 @@ class runApp : Fragment() {
                                 "MyPrefs",
                                 Context.MODE_PRIVATE
                             )
-                        val stored_gpt_version = shared_Preferences.getString("gpt_version", "GPT_3.5")
+                        val stored_gpt_version =
+                            shared_Preferences.getString("gpt_version", "GPT_3.5")
 
                         coroutineRunning = true
                         button_execute?.isEnabled = false
@@ -242,17 +243,25 @@ class runApp : Fragment() {
             // 将shareView转换为bitmap
             val displayMetrics = context?.resources?.displayMetrics
             val width = displayMetrics?.widthPixels ?: 0
-            val height = 2 * width
 
+            // 先测量 shareView
             shareView.measure(
                 View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
             )
-            shareView.layout(0, 0, width, height)
 
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            // 获取shareView的实际高度
+            val actualHeight = shareView.measuredHeight
+
+            // 使用实际高度进行布局
+            shareView.layout(0, 0, width, actualHeight)
+
+            // 使用实际高度创建位图
+            val bitmap = Bitmap.createBitmap(width, actualHeight, Bitmap.Config.ARGB_8888)
+
             val canvas = Canvas(bitmap)
             shareView.draw(canvas)
+
 
             // 把bitmap转换为png并分享到外部
             val file =
