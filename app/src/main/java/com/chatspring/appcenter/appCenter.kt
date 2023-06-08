@@ -71,39 +71,39 @@ class appCenter : Fragment() {
 
     }
 
-    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
-            if (isGetAllCards) {
-                //等待0.5秒
-                val timer = Timer()
-                timer.schedule(object : TimerTask() {
-                    override fun run() {
-                        // 需要一个Activity的实例，如果在Fragment中可以用getActivity()
-                        val activity: Activity? = activity
-                        activity?.runOnUiThread {
-                            // 更新UI
-                            root_layout?.removeAllViews()
-                            // 更新卡片
-                            loadAppCard()
-                        }
-                    }
-                }, 100)
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val intentFilter = IntentFilter("com.chatspring.appCenter")
-        LocalBroadcastManager.getInstance(requireActivity())
-            .registerReceiver(receiver, intentFilter)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(receiver)
-    }
+//    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+//        override fun onReceive(context: Context, intent: Intent) {
+//            val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
+//            if (isGetAllCards) {
+//                //等待0.5秒
+//                val timer = Timer()
+//                timer.schedule(object : TimerTask() {
+//                    override fun run() {
+//                        // 需要一个Activity的实例，如果在Fragment中可以用getActivity()
+//                        val activity: Activity? = activity
+//                        activity?.runOnUiThread {
+//                            // 更新UI
+//                            root_layout?.removeAllViews()
+//                            // 启动协程
+//                            loadAppCard()
+//                        }
+//                    }
+//                }, 100)
+//            }
+//        }
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        val intentFilter = IntentFilter("com.chatspring.appCenter")
+//        LocalBroadcastManager.getInstance(requireActivity())
+//            .registerReceiver(receiver, intentFilter)
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(receiver)
+//    }
 
 
     override fun onCreateView(
