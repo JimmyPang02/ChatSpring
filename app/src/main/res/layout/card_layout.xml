@@ -25,7 +25,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/button_run"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/cardicon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -53,9 +53,9 @@
         android:text="运行"
         android:textSize="13dp"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintBottom_toBottomOf="@+id/cardicon"
         app:layout_constraintEnd_toStartOf="@+id/spinnerApp"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintTop_toTopOf="@+id/cardicon" />
 
     <Spinner
         android:id="@+id/spinnerApp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/cardicon"
         android:layout_width="54dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"

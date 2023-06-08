@@ -23,19 +23,22 @@ class AppCenterCard : BmobObject() {
     var appPrompt: String? = null
     var userName: String? = null
     var mObjectId: String? = null
+    var icon: String? = null
 
     //添加数据
     fun create_card(
         setAppName: String?,
         setAppDescription: String?,
         setAppPrompt: String?,
-        setUserName: String?
+        setUserName: String?,
+        seticon: String?
     ) {
         val card = AppCenterCard()
         card.appName = setAppName
         card.appDescription = setAppDescription
         card.appPrompt = setAppPrompt
         card.userName = setUserName
+        card.icon = seticon
 
 
         //保存到数据库
@@ -180,13 +183,15 @@ class AppCenterCard : BmobObject() {
         setAppName: String?,
         setAppDescription: String?,
         setAppPrompt: String?,
-        setUserName: String?
+        setUserName: String?,
+        seticon: String?
     ) {
         var card = AppCenterCard()
         card.appName = setAppName
         card.appDescription = setAppDescription
         card.appPrompt = setAppPrompt
         card.userName = setUserName
+        card.icon = seticon
 
         //保存到数据库
         card.save(object : SaveListener<String?>() {

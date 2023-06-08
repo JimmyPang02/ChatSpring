@@ -61,22 +61,23 @@
             android:src="@drawable/qrcode" />
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/textview_appname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="卡片名称"
-        android:gravity="center"
-        android:textSize="22sp"
-        android:textColor="@color/black"
-        android:padding="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="卡片名称"
+        android:textColor="@color/black"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@id/linear_layout_top"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/linear_layout_top"
-        app:layout_constraintTop_toBottomOf="@id/linear_layout_top" />
-
+        app:layout_constraintTop_toBottomOf="@+id/cardiconshare" />
 
     <TextView
         android:id="@+id/textview_appdescription"
@@ -152,6 +153,15 @@
         app:layout_constraintStart_toStartOf="@id/linear_layout_top"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
+    <ImageView
+        android:id="@+id/cardiconshare"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_appname"
+        app:layout_constraintStart_toStartOf="@+id/textview_appname"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_top"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

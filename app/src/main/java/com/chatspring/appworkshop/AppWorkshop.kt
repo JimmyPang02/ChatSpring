@@ -69,9 +69,8 @@ class AppWorkshop : Fragment(), CardAdapter.OnItemClickListener {
                                     resourceId = temp
                                 }
                             }
-
                             if(appname !=null&&appintro !=null&&appprompt !=null){
-                                cardDataList.add(CardData(resourceId, appname,appintro,appprompt))
+                                cardDataList.add(CardData(resourceId, appname,appintro,appprompt,iconname))
                             }
                         }
                         // 通知适配器数据已更改
@@ -103,9 +102,10 @@ class AppWorkshop : Fragment(), CardAdapter.OnItemClickListener {
         val appname = cardData.title
         val appintro = cardData.description
         val appprompt = cardData.prompt
+        val icon=cardData.iconname
 
         // 跳转到ImportApp Fragment，参数为app名
-        val fragment = ImportApp.newInstance(appname,appintro,appprompt)
+        val fragment = ImportApp.newInstance(appname,appintro,appprompt,icon)
         activity?.supportFragmentManager?.beginTransaction()?.apply {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
 

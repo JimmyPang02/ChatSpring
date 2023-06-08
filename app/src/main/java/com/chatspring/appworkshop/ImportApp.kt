@@ -20,6 +20,7 @@ import com.chatspring.bmob_data.workshop
 private const val ARG_APPNAME = "param1"
 private const val ARG_APPINTRO = "param2"
 private const val ARG_APPPROMPT = "param3"
+private const val ARG_ICON = "param4"
 
 
 class ImportApp : Fragment() {
@@ -27,7 +28,8 @@ class ImportApp : Fragment() {
     private var appname: String? = null
     private var appintro: String? = null
     private var appprompt: String? = null
-    private  var username:String?=null
+    private var username: String? = null
+    private var icon: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,7 @@ class ImportApp : Fragment() {
             appname = it.getString(ARG_APPNAME)
             appintro = it.getString(ARG_APPINTRO)
             appprompt = it.getString(ARG_APPPROMPT)
+            icon = it.getString(ARG_ICON)
         }
     }
 
@@ -44,40 +47,41 @@ class ImportApp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater.inflate(R.layout.fragment_import_app, container, false)
+        val view = inflater.inflate(R.layout.fragment_import_app, container, false)
         // 设置确认按钮的点击事件
         val confirmButton: Button = view.findViewById(R.id.confirm_button)
         confirmButton.setOnClickListener {
 
             // 判断用户是否登陆
-            if(!LoginState.isLoggedIn){
+            if (!LoginState.isLoggedIn) {
                 // 如果用户没有登陆，跳转到登陆界面,并且弹出消息框
                 Toast.makeText(requireContext(), "请先登陆", Toast.LENGTH_SHORT).show()
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                 transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 transaction?.replace(R.id.fragment_main, LoginFragment())?.commit()
                 return@setOnClickListener
-            }
-            else{
+            } else {
                 // 如果用户已经登陆，获取用户名
-                val sharedPreferences = requireActivity().getSharedPreferences( "my-preferences", Context.MODE_PRIVATE)
+                val sharedPreferences =
+                    requireActivity().getSharedPreferences("my-preferences", Context.MODE_PRIVATE)
                 //username = sharedPreferences .getString("username","")
             }
 
             // 上传数据到appcenter表
             val upload_card = AppCenterCard()
-            val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+            val sharedPreferences =
+                requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
 
             // 获取用户名字段的值
             val username = sharedPreferences.getString("username", "")
-            upload_card.upload_from_workshop(appname!!, appintro!!, appprompt!!, username!!)
+            upload_card.upload_from_workshop(appname!!, appintro!!, appprompt!!, username!!,icon)
 
             //传输changed回去
-            val bundle=Bundle()
+            val bundle = Bundle()
             //changed=1
-            bundle.putInt("changed",1)
-            val appCenterFragment=appCenter()
-            appCenterFragment.arguments=bundle
+            bundle.putInt("changed", 1)
+            val appCenterFragment = appCenter()
+            appCenterFragment.arguments = bundle
 
             val transaction = activity?.supportFragmentManager?.beginTransaction()
 
@@ -111,12 +115,13 @@ class ImportApp : Fragment() {
     }
 
     companion object {
-        fun newInstance(param1: String,param2:String,param3:String) =
+        fun newInstance(param1: String, param2: String, param3: String,param4:String) =
             ImportApp().apply {
                 arguments = Bundle().apply {
                     putString(ARG_APPNAME, param1)
                     putString(ARG_APPINTRO, param2)
                     putString(ARG_APPPROMPT, param3)
+                    putString(ARG_ICON,param4)
                 }
             }
     }

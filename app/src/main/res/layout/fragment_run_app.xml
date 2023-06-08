@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -147,24 +147,35 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center"
                 android:text="文本润色"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/cardiconrun" />
 
             <Button
                 android:id="@+id/button_share"
                 android:layout_width="88dp"
                 android:layout_height="35dp"
-                android:text="分享"
                 android:background="@drawable/bg_rounded_gray"
+                android:text="分享"
                 app:layout_constraintBottom_toBottomOf="@+id/button_copy_result"
                 app:layout_constraintStart_toStartOf="@+id/scrollView2" />
+
+            <ImageView
+                android:id="@+id/cardiconrun"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_appInfo"
+                app:layout_constraintStart_toStartOf="@+id/textView_appInfo"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
