@@ -1,6 +1,7 @@
 package com.chatspring
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
@@ -30,6 +32,10 @@ import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.sql.Time
+import java.util.Timer
+import java.util.TimerTask
+import kotlin.concurrent.schedule
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -132,11 +138,22 @@ class appCenter : Fragment() {
 
         val receiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                // 这里是你处理接收到的广播的逻辑
                 val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
                 if (isGetAllCards) {
-                    // 停止刷新动画
-                    rotation.cancel()
+                    val timer = Timer()
+                    timer.schedule(object : TimerTask() {
+                        override fun run() {
+                            // 需要一个Activity的实例，如果在Fragment中可以用getActivity()
+                            val activity: Activity? = activity
+                            activity?.runOnUiThread {
+                                // 更新UI
+                                root_layout?.removeAllViews()
+                                // 更新卡片
+                                loadAppCard()
+                                rotation.cancel()
+                            }
+                        }
+                    }, 500)
                 }
             }
         }
@@ -144,7 +161,6 @@ class appCenter : Fragment() {
         // 注册广播接收器
         val intentFilter = IntentFilter("com.chatspring.appCenter")
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, intentFilter)
-
 
 
         val sharedPreferences =
@@ -239,7 +255,12 @@ class appCenter : Fragment() {
         return view
     }
 
-    fun view_controller(appName: String?, appDescription: String?, appPrompt: String?) {
+    fun view_controller(
+        appName: String?,
+        appDescription: String?,
+        appPrompt: String?,
+        icon: String?
+    ) {
         val cardView = LayoutInflater.from(activity).inflate(R.layout.card_layout, null)
 
         val button = cardView.findViewById<Button>(R.id.button_run)
@@ -315,10 +336,25 @@ class appCenter : Fragment() {
         appNameLayout.text = appName
         appDescriptionLayout.text = appDescription
 
+        val cardicon = cardView.findViewById<ImageView>(R.id.cardicon)
+
+        var resourceId = resources.getIdentifier(icon, "drawable", activity?.packageName)
+        // 如果找不到则使用默认的"chat"资源ID
+        if (resourceId == 0) {
+            var temp = resources.getIdentifier("chat", "drawable", activity?.packageName)
+            resourceId = temp
+        }
+
+        //把icon设置到cardicon
+        cardicon.setImageResource(resourceId)
+
+
+
+
 
         cardViewList.add(cardView)
 
-        cardModelList.add(AppModel(appName, appDescription, appPrompt))
+        cardModelList.add(AppModel(appName, appDescription, appPrompt, icon))
 
 
         root_layout?.addView(cardView, 0)
@@ -333,8 +369,9 @@ class appCenter : Fragment() {
             val appName = bmob_model.appName
             val appDescription = bmob_model.appDescription
             val appPrompt = bmob_model.appPrompt
+            val icon = bmob_model.icon
             //调用view_controller方法
-            view_controller(appName, appDescription, appPrompt)
+            view_controller(appName, appDescription, appPrompt, icon)
         }
     }
 

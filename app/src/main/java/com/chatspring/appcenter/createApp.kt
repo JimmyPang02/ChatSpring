@@ -90,7 +90,7 @@ class createApp : Fragment() {
                 setAppName?.text.toString(),
                 textView_Input?.text.toString(),
                 setPrompt?.text.toString(),
-                GlobaluserName,
+                GlobaluserName,"huodong"
             )
 
 
