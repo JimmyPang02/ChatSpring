@@ -1,5 +1,6 @@
 package com.chatspring
 
+import android.content.Context
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
@@ -143,6 +144,13 @@ class createApp : Fragment() {
             }
         }
 
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val gpt_version = sharedPreferences.getString("gpt_version", "GPT_3.5")
+
+        //把gpt_version写入resultShow
+        textView_resultShow?.text = "使用的GPT版本：$gpt_version"
+
 
         var coroutineRunning = false
         button_test?.setOnClickListener {
@@ -178,15 +186,21 @@ class createApp : Fragment() {
                         textView_resultShow?.movementMethod =
                             ScrollingMovementMethod.getInstance()
 
-                        chatGPT_flow(prompt, input).collect { chunk ->
-                            for (choice in chunk.choices) {
-                                val delta = choice.delta
-                                delta?.let {
-                                    val generatedText = it.content
-                                    if (!generatedText.isNullOrEmpty()) {
-                                        withContext(Dispatchers.Main) {
+                        val sharedPreferences =
+                            requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        val gpt_version = sharedPreferences.getString("gpt_version", "GPT_3.5")
 
-                                            textView_resultShow?.append(generatedText + "")
+                        gpt_version?.let { it1 ->
+                            chatGPT_flow(prompt, input, it1).collect { chunk ->
+                                for (choice in chunk.choices) {
+                                    val delta = choice.delta
+                                    delta?.let {
+                                        val generatedText = it.content
+                                        if (!generatedText.isNullOrEmpty()) {
+                                            withContext(Dispatchers.Main) {
+
+                                                textView_resultShow?.append(generatedText + "")
+                                            }
                                         }
                                     }
                                 }

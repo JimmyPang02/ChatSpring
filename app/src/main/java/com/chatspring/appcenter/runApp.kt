@@ -143,6 +143,12 @@ class runApp : Fragment() {
             }
         }
 
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val gpt_version = sharedPreferences.getString("gpt_version", "GPT_3.5")
+
+        //把gpt_version显示在textView_resultShow
+        textView_resultShow?.text = "使用的GPT版本: $gpt_version"
 
 
         button_execute?.setOnClickListener {
@@ -166,6 +172,13 @@ class runApp : Fragment() {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
+                        val shared_Preferences =
+                            requireActivity().getSharedPreferences(
+                                "MyPrefs",
+                                Context.MODE_PRIVATE
+                            )
+                        val stored_gpt_version = shared_Preferences.getString("gpt_version", "GPT_3.5")
+
                         coroutineRunning = true
                         button_execute?.isEnabled = false
                         button_execute?.text = "运行中..."
@@ -176,20 +189,24 @@ class runApp : Fragment() {
                         textView_resultShow?.movementMethod =
                             ScrollingMovementMethod.getInstance()
 
-                        chatGPT_flow(prompt, input).collect { chunk ->
-                            for (choice in chunk.choices) {
-                                val delta = choice.delta
-                                delta?.let {
-                                    val generatedText = it.content
-                                    if (!generatedText.isNullOrEmpty()) {
-                                        withContext(Dispatchers.Main) {
 
-                                            textView_resultShow?.append(generatedText + "")
+                        stored_gpt_version?.let { it1 ->
+                            chatGPT_flow(prompt, input, it1).collect { chunk ->
+                                for (choice in chunk.choices) {
+                                    val delta = choice.delta
+                                    delta?.let {
+                                        val generatedText = it.content
+                                        if (!generatedText.isNullOrEmpty()) {
+                                            withContext(Dispatchers.Main) {
+
+                                                textView_resultShow?.append(generatedText + "")
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
                             textView_resultShow?.text = "出现错误：${e.message}"
@@ -210,9 +227,11 @@ class runApp : Fragment() {
             // 创建shareimg.xml的布局
             val shareView = LayoutInflater.from(context).inflate(R.layout.shareimg, null)
             val shareView_textview_appname = shareView.findViewById<TextView>(R.id.textview_appname)
-            val shareView_textview_appdescription = shareView.findViewById<TextView>(R.id.textview_appdescription)
+            val shareView_textview_appdescription =
+                shareView.findViewById<TextView>(R.id.textview_appdescription)
             val shareView_textview_myinput = shareView.findViewById<TextView>(R.id.textview_myinput)
-            val shareView_textview_response = shareView.findViewById<TextView>(R.id.textview_response)
+            val shareView_textview_response =
+                shareView.findViewById<TextView>(R.id.textview_response)
 
             // 设置shareView的内容
             shareView_textview_appname.text = appName
@@ -236,13 +255,18 @@ class runApp : Fragment() {
             shareView.draw(canvas)
 
             // 把bitmap转换为png并分享到外部
-            val file = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "shareimg.png")
+            val file =
+                File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "shareimg.png")
             val outputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             outputStream.flush()
             outputStream.close()
 
-            val fileUri = FileProvider.getUriForFile(context!!, "${BuildConfig.APPLICATION_ID}.provider", file)
+            val fileUri = FileProvider.getUriForFile(
+                context!!,
+                "${BuildConfig.APPLICATION_ID}.provider",
+                file
+            )
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_STREAM, fileUri)
