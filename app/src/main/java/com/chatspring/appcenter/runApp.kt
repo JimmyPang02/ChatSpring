@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -74,6 +75,19 @@ class runApp : Fragment() {
         val appName = bundle?.getString("appName")
         val appPrompt = bundle?.getString("appPrompt")
         val appDescription = bundle?.getString("appDescription")
+        val icon = bundle?.getString("icon")
+
+        val cardicon = view?.findViewById<ImageView>(R.id.cardiconrun)
+
+        var resourceId = resources.getIdentifier(icon, "drawable", activity?.packageName)
+        // 如果找不到则使用默认的"chat"资源ID
+        if (resourceId == 0) {
+            var temp = resources.getIdentifier("chat", "drawable", activity?.packageName)
+            resourceId = temp
+        }
+
+        //把icon设置到cardicon
+        cardicon?.setImageResource(resourceId)
 
         textView_appInfo = view?.findViewById(R.id.textView_appInfo)
         if (appName != null) {
@@ -234,11 +248,18 @@ class runApp : Fragment() {
             val shareView_textview_response =
                 shareView.findViewById<TextView>(R.id.textview_response)
 
+            val cardiconshare = shareView.findViewById<ImageView>(R.id.cardiconshare)
+
             // 设置shareView的内容
             shareView_textview_appname.text = appName
             shareView_textview_appdescription.text = appDescription
             shareView_textview_myinput.text = textView_Input?.text.toString()
             shareView_textview_response.text = textView_resultShow?.text.toString()
+
+            //把resourceid内容设置到shareView
+            //把icon设置到cardicon
+            cardiconshare?.setImageResource(resourceId)
+
 
             // 将shareView转换为bitmap
             val displayMetrics = context?.resources?.displayMetrics

@@ -416,6 +416,7 @@ class appCenter : Fragment() {
                 bundle.putString("appName", model.appName)
                 bundle.putString("appDescription", model.appDescription)
                 bundle.putString("appPrompt", model.appPrompt)
+                bundle.putString("icon", model.icon)
                 val runApp = runApp()
                 runApp.arguments = bundle
                 //设置转场动画
