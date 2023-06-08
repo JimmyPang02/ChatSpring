@@ -83,6 +83,12 @@ class createApp : Fragment() {
                 return@setOnClickListener
             }
 
+            //判定bmob_model_list的长度
+            if (bmob_model_list.size >= 8) {
+                Toast.makeText(activity, "卡片数量上限为8张", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             //上传到Bmob云数据库
             val model = AppCenterCard()
