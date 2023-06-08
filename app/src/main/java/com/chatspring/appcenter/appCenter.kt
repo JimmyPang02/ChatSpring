@@ -124,7 +124,7 @@ class appCenter : Fragment() {
         val refresh = view?.findViewById<ImageButton>(R.id.refresh)
 
         val rotation = ObjectAnimator.ofFloat(refresh, "rotation", 0f, 360f)
-        rotation.duration = 1000
+        rotation.duration = 2000
         rotation.repeatCount = ObjectAnimator.INFINITE
         rotation.interpolator = LinearInterpolator()
         refresh?.setOnClickListener {
@@ -132,7 +132,7 @@ class appCenter : Fragment() {
             //加入空白页面激活滚动
             val blankScreen = inflater.inflate(R.layout.blank_screen, null)
             //往末尾加入
-            root_layout?.addView(blankScreen)
+            //root_layout?.addView(blankScreen)
             val model = AppCenterCard()
             cardViewList.clear()
             cardModelList.clear()
@@ -163,7 +163,7 @@ class appCenter : Fragment() {
                                 rotation.cancel()
                             }
                         }
-                    }, 800)
+                    }, 200)
                 }
             }
         }
@@ -232,7 +232,7 @@ class appCenter : Fragment() {
             //加入空白页面激活滚动
             val blankScreen = inflater.inflate(R.layout.blank_screen, null)
             //往末尾加入
-            root_layout?.addView(blankScreen)
+            //root_layout?.addView(blankScreen)
         }
 
 
