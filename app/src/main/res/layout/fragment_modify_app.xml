@@ -156,11 +156,11 @@
                 android:text="应用名"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintStart_toStartOf="@+id/cardiconmodify"
+                app:layout_constraintTop_toBottomOf="@+id/cardiconmodify" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/cardiconmodify"
                 android:layout_width="60dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="8dp"

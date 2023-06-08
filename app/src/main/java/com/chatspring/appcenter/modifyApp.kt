@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import com.chatspring.bmob_data.AppCenterCard
 
@@ -71,8 +72,20 @@ class modifyApp : Fragment() {
         textView_Input?.setText(model.appDescription)
         //设置appPrompt的内容
         setPrompt?.setText(model.appPrompt)
+        //设置icon的内容
+        var icon= model.icon
 
+        val cardicon = view?.findViewById<ImageView>(R.id.cardiconmodify)
 
+        var resourceId = resources.getIdentifier(icon, "drawable", activity?.packageName)
+        // 如果找不到则使用默认的"chat"资源ID
+        if (resourceId == 0) {
+            var temp = resources.getIdentifier("chat", "drawable", activity?.packageName)
+            resourceId = temp
+        }
+
+        //把icon设置到cardicon
+        cardicon?.setImageResource(resourceId)
 
 
         button_finish?.setOnClickListener {
