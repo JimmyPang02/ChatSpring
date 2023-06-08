@@ -1,6 +1,8 @@
 package com.chatspring.bmob_data
 
+import android.content.Intent
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import cn.bmob.v3.Bmob.getApplicationContext
 import cn.bmob.v3.BmobObject
 import cn.bmob.v3.BmobQuery
@@ -91,6 +93,10 @@ class AppCenterCard : BmobObject() {
                 if (ex == null) {
                     println("查询成功：共" + cards?.size + "条数据。")
                     if (cards != null) {
+                        //清空bmob_model_list和bmob_mObjectId_list
+                        bmob_model_list.clear()
+                        bmob_mObjectId_list.clear()
+
                         for (card: AppCenterCard in cards) {
                             //检测userName字段是否和GlobaluserName一样
                             if (card.userName == GlobaluserName) {
@@ -98,6 +104,13 @@ class AppCenterCard : BmobObject() {
                                 bmob_model_list.add(card)
                                 //存入数组mObjectId_list
                                 card.objectId?.let { bmob_mObjectId_list.add(it) }
+
+                                //通知appCenterFragment更新卡片
+                                val intent = Intent("com.chatspring.appCenter")
+                                intent.putExtra("isGetAllCards", true)
+                                LocalBroadcastManager.getInstance(getApplicationContext())
+                                    .sendBroadcast(intent)
+
                             }
                         }
                         //弹出用户名和存入数组的卡片数

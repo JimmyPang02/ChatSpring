@@ -1,7 +1,10 @@
 package com.chatspring
 
 import android.animation.ObjectAnimator
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +20,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import cn.bmob.v3.Bmob
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
@@ -26,8 +30,6 @@ import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.Timer
-import kotlin.concurrent.schedule
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -61,6 +63,30 @@ class appCenter : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+    }
+
+    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
+            if (isGetAllCards) {
+                root_layout?.removeAllViews()
+                // 更新卡片
+                loadAppCard()
+
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("com.chatspring.appCenter")
+        LocalBroadcastManager.getInstance(requireActivity())
+            .registerReceiver(receiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(receiver)
     }
 
 
@@ -100,22 +126,26 @@ class appCenter : Fragment() {
 
             rotation.start()
 
+        }
 
+        val context = requireContext()
 
-            Timer().schedule(1000) {
-                view.post {
-                    loadAppCard()
-                    //rotation.cancel()
-                }
-            }
-
-            Timer().schedule(2000) {
-                view.post {
+        val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                // 这里是你处理接收到的广播的逻辑
+                val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
+                if (isGetAllCards) {
+                    // 停止刷新动画
                     rotation.cancel()
                 }
             }
-
         }
+
+        // 注册广播接收器
+        val intentFilter = IntentFilter("com.chatspring.appCenter")
+        LocalBroadcastManager.getInstance(context).registerReceiver(receiver, intentFilter)
+
+
 
         val sharedPreferences =
             requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
