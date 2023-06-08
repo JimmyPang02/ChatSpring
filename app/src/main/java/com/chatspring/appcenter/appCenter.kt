@@ -32,6 +32,10 @@ import com.chatspring.appsetting.LoginState
 import com.chatspring.appsetting.MainFragment
 import com.chatspring.bmob_data.AppCenterCard
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.sql.Time
 import java.util.Timer
 import java.util.TimerTask
@@ -71,39 +75,34 @@ class appCenter : Fragment() {
 
     }
 
-//    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context, intent: Intent) {
-//            val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
-//            if (isGetAllCards) {
-//                //等待0.5秒
-//                val timer = Timer()
-//                timer.schedule(object : TimerTask() {
-//                    override fun run() {
-//                        // 需要一个Activity的实例，如果在Fragment中可以用getActivity()
-//                        val activity: Activity? = activity
-//                        activity?.runOnUiThread {
-//                            // 更新UI
-//                            root_layout?.removeAllViews()
-//                            // 启动协程
-//                            loadAppCard()
-//                        }
-//                    }
-//                }, 100)
-//            }
-//        }
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        val intentFilter = IntentFilter("com.chatspring.appCenter")
-//        LocalBroadcastManager.getInstance(requireActivity())
-//            .registerReceiver(receiver, intentFilter)
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(receiver)
-//    }
+    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
+            if (isGetAllCards) {
+                // Using MainScope as we want this coroutine to be bound to the Activity lifecycle
+                MainScope().launch {
+                    withContext(Dispatchers.Main) {
+                        // Update UI
+                        root_layout?.removeAllViews()
+                        // Update card
+                        loadAppCard()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("com.chatspring.appCenter")
+        LocalBroadcastManager.getInstance(requireActivity())
+            .registerReceiver(receiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(requireActivity()).unregisterReceiver(receiver)
+    }
 
 
     override fun onCreateView(
@@ -157,9 +156,9 @@ class appCenter : Fragment() {
                             val activity: Activity? = activity
                             activity?.runOnUiThread {
                                 // 更新UI
-                                root_layout?.removeAllViews()
+                                //root_layout?.removeAllViews()
                                 // 更新卡片
-                                loadAppCard()
+                                //loadAppCard()
                                 rotation.cancel()
                             }
                         }

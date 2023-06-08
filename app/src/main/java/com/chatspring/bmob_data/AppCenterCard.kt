@@ -193,6 +193,18 @@ class AppCenterCard : BmobObject() {
         card.userName = setUserName
         card.icon = seticon
 
+        //获取当前bmob_mObjectId_list的长度
+        var bmob_mObjectId_list_size = bmob_mObjectId_list.size
+        //如果长度超过8个，不允许上传
+        if (bmob_mObjectId_list_size >= 8) {
+            Toast.makeText(
+                getApplicationContext(),
+                "卡片上传失败，卡片数量上限为8张",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
         //保存到数据库
         card.save(object : SaveListener<String?>() {
             override fun done(objectId: String?, e: BmobException?) {
