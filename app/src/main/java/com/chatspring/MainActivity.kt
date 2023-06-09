@@ -15,9 +15,9 @@ import cn.bmob.v3.Bmob
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-//const val BmobAppKey = "032b1bb187d4fc1e9cad0ba73d98004f" //pzm
+const val BmobAppKey = "032b1bb187d4fc1e9cad0ba73d98004f" //pzm
 //const val BmobAppKey = "c86901c654d74ef0efc32001dae777b6"
-const val BmobAppKey = "f4451fde9487c9f6c77dc7af136eca23"
+//const val BmobAppKey = "f4451fde9487c9f6c77dc7af136eca23"
 
 
 class MainActivity : AppCompatActivity() {
