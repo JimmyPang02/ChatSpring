@@ -43,8 +43,8 @@ class AppWorkshop : Fragment(), CardAdapter.OnItemClickListener {
                 if (e == null) {
                     if (applist.isEmpty()) {
                         val dialog = AlertDialog.Builder(activity)
-                        dialog.setTitle("查询工作坊失败")
-                        dialog.setMessage("很抱歉,暂时没有可查询的工作坊信息!")
+                        dialog.setTitle("查询应用工作失败")
+                        dialog.setMessage("很抱歉,暂时没有可查询的应用工坊信息!")
                         dialog.setPositiveButton("确定") { _, _ -> }
                         dialog.show()
                     } else {
@@ -78,7 +78,7 @@ class AppWorkshop : Fragment(), CardAdapter.OnItemClickListener {
                     }
                 } else {
                     val dialog = AlertDialog.Builder(activity)
-                    dialog.setTitle("查询工作坊失败")
+                    dialog.setTitle("查询应用工坊失败")
                     dialog.setMessage("服务器错误,请稍后再试!")
                     dialog.setPositiveButton("确定") { _, _ -> }
                     dialog.show()

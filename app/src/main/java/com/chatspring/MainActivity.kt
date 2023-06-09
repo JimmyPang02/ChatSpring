@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navView: BottomNavigationView
     private lateinit var navController: NavController
+    // 标志位，标识导航是否由程序触发
+    private var isNavigationProgrammatic = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.appCenterFragment)
             navView.selectedItemId = R.id.menu_app_center
         }
-
 
         // 设置导航栏的点击事件
         navView.setOnNavigationItemSelectedListener { item ->

@@ -16,6 +16,12 @@
         tools:layout="@layout/review_app_workshop" />
 
     <fragment
+        android:id="@+id/AppSettingLoginFragment"
+        android:name="com.chatspring.appsetting.LoginFragment"
+        android:label="Login Fragment"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
         android:id="@+id/AppSetting_notlogin"
         android:name="com.chatspring.appsetting.MainFragment"
         android:label="App Setting"

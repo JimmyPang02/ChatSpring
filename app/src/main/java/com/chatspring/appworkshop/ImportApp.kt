@@ -9,12 +9,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.chatspring.R
 import com.chatspring.appCenter
 import com.chatspring.appsetting.LoginFragment
 import com.chatspring.appsetting.LoginState
 import com.chatspring.bmob_data.AppCenterCard
 import com.chatspring.bmob_data.workshop
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_APPNAME = "param1"
@@ -30,7 +33,8 @@ class ImportApp : Fragment() {
     private var appprompt: String? = null
     private var username: String? = null
     private var icon: String? = null
-
+    private lateinit var navController: NavController
+    private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +56,19 @@ class ImportApp : Fragment() {
         val confirmButton: Button = view.findViewById(R.id.confirm_button)
         confirmButton.setOnClickListener {
 
-            // 判断用户是否登陆
+        // 导航栏控制
+        navController = Navigation.findNavController(view)
+        navView = requireActivity().findViewById(R.id.nav_view)
+
+        // 判断用户是否登陆
             if (!LoginState.isLoggedIn) {
                 // 如果用户没有登陆，跳转到登陆界面,并且弹出消息框
                 Toast.makeText(requireContext(), "请先登陆", Toast.LENGTH_SHORT).show()
-                val transaction = activity?.supportFragmentManager?.beginTransaction()
-                transaction?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                transaction?.replace(R.id.fragment_main, LoginFragment())?.commit()
+                // 跳转到登陆界面
+                // 用navController跳转
+                navController.navigate(R.id.AppSettingLoginFragment)
+                navView.selectedItemId = R.id.settings
+
                 return@setOnClickListener
             } else {
                 // 如果用户已经登陆，获取用户名
@@ -83,12 +93,13 @@ class ImportApp : Fragment() {
             val appCenterFragment = appCenter()
             appCenterFragment.arguments = bundle
 
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            //导入应用后，跳转到appcenter fragment
+//            val transaction = activity?.supportFragmentManager?.beginTransaction()
+//            transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+//            transaction?.replace(R.id.fragment_main, appCenterFragment)?.commit()
+            navController.navigate(R.id.appCenterFragment)
+            navView.selectedItemId = R.id.menu_app_center
 
-            //设置转场动画
-            transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-
-            transaction?.replace(R.id.fragment_main, appCenterFragment)?.commit()
 
         }
         // 点击取消按钮，返回到AppWorkshop fragment
