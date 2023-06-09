@@ -1,6 +1,7 @@
 package com.chatspring.appworkshop
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import cn.bmob.v3.Bmob
 import com.chatspring.R
 import com.chatspring.appCenter
 import com.chatspring.appsetting.LoginFragment
@@ -97,6 +100,14 @@ class ImportApp : Fragment() {
 //            val transaction = activity?.supportFragmentManager?.beginTransaction()
 //            transaction?.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
 //            transaction?.replace(R.id.fragment_main, appCenterFragment)?.commit()
+
+
+            //通知appCenterFragment更新卡片
+            val intent = Intent("com.chatspring.appCenter")
+            intent.putExtra("refresh", true)
+            LocalBroadcastManager.getInstance(Bmob.getApplicationContext())
+                .sendBroadcast(intent)
+
             navController.navigate(R.id.appCenterFragment)
             navView.selectedItemId = R.id.menu_app_center
 

@@ -148,6 +148,7 @@ class appCenter : Fragment() {
         val receiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 val isGetAllCards = intent.getBooleanExtra("isGetAllCards", false)
+                var refresh = intent.getBooleanExtra("refresh", false)
                 if (isGetAllCards) {
                     val timer = Timer()
                     timer.schedule(object : TimerTask() {
@@ -164,12 +165,26 @@ class appCenter : Fragment() {
                         }
                     }, 200)
                 }
+                if (refresh) {
+                    root_layout?.removeAllViews()
+                    //加入空白页面激活滚动
+                    val blankScreen = layoutInflater.inflate(R.layout.blank_screen, null)
+                    //往末尾加入
+                    root_layout?.addView(blankScreen)
+                    val model = AppCenterCard()
+                    cardViewList.clear()
+                    cardModelList.clear()
+                    bmob_mObjectId_list.clear()
+                    bmob_model_list.clear()
+                    model.get_all_cards()
+                }
             }
         }
 
         // 注册广播接收器
         val intentFilter = IntentFilter("com.chatspring.appCenter")
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, intentFilter)
+
 
 
         val sharedPreferences =
