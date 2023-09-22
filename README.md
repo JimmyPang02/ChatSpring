@@ -1,6 +1,6 @@
 # 文泉ChatSpring
 
-一款基于GPT的AI工具箱！🚀
+一款基于GPT的AI工具箱APP！🚀
 
 文泉Chatspring致力于**协助您轻松打造专属的AI应用**，通过预制的prompt实现一键式体验，将创意源源不断地转化为现实。✨
 
