@@ -1,4 +1,5 @@
 # 文泉ChatSpring
+[English](README.md) | [简体中文](README_zh.md)
 
 一款基于GPT的AI工具箱APP！🚀
 
