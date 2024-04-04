@@ -1,4 +1,5 @@
 # 文泉 ChatSpring
+[English](README.md) | [简体中文](README_zh.md)
 
 A GPT-based AI toolkit app! 🚀
 
