@@ -9,7 +9,7 @@ Simply enter OpenAI's **API KEY** to enjoy the intelligent convenience brought b
 
 In our diverse **Application Workshop**, you can explore various applications shared by users, sparking your creative inspiration. 💡
 
-Wenquan ChatSpring — making your life, study, and work more convenient and efficient, embarking on a new journey of wisdom! 🌟
+Wenquan ChatSpring ———— making your life, study, and work more convenient and efficient, embarking on a new journey of wisdom! 🌟
 
 ## App Interface
 <div align="center">
