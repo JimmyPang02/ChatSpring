@@ -1,7 +1,9 @@
 <div align="center">
   <img src="./app/src/main/res/drawable/chatspringlogo.png" alt="ChatSpring Logo" width="130"/>
   <h1 align="center">文泉 ChatSpring 💬🌟 </h1>
-</div>[English](README.md) | [简体中文](README_zh.md)
+</div>
+
+[English](README.md) | [简体中文](README_zh.md)
 
 一款基于GPT的AI工具箱APP！🚀
 
