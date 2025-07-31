@@ -15,6 +15,34 @@ In our diverse **Application Workshop**, you can explore various applications sh
 
 Wenquan ChatSpring ———— making your life, study, and work more convenient and efficient, embarking on a new journey of wisdom! 🌟
 
+## What Can ChatSpring Do? 🤖
+
+### 🏭 App Center (应用中心)
+- **Create Custom AI Apps**: Design your own AI applications with custom prompts and descriptions
+- **Test Before Deploy**: Test your AI applications with sample inputs before making them live
+- **Manage Your Apps**: Edit, delete, share, and organize your created applications
+- **GPT Integration**: Support for both GPT-3.5 and GPT-4 models
+- **Icon Customization**: Personalize your apps with custom icons
+
+### 🛠️ Creative Workshop (创意工坊)  
+- **Discover Community Apps**: Browse and explore AI applications shared by other users
+- **Import & Use**: Import interesting applications from the community workshop
+- **Share Your Creations**: Share your own AI apps with the global community
+- **Inspiration Hub**: Get inspired by diverse use cases and creative implementations
+
+### ⚙️ Smart Settings
+- **User Authentication**: Secure login and account management
+- **API Configuration**: Easy OpenAI API key setup and management
+- **Model Selection**: Choose between GPT-3.5 and GPT-4 based on your needs
+- **App Information**: Version info and developer details
+
+### 🚀 Key Features
+- **One-Click Experience**: Pre-configured prompts for instant AI interactions
+- **No Additional Costs**: Use your own OpenAI API key without extra charges
+- **Cross-Platform Sharing**: Community-driven app ecosystem
+- **Real-Time Testing**: Instant feedback when creating and testing apps
+- **Intuitive Interface**: User-friendly design for both beginners and experts
+
 ## App Interface
 <div align="center">
   <p><strong>App Center</strong></p>
